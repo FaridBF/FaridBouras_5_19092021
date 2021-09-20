@@ -49,7 +49,7 @@ nav {
 
 /*Section 1 - Présentation*/
 .accueil {
-  background-color: #9e63ce;
+  background-color: #965fe9;
   color: white;
   height: 225px;
   margin-bottom: 20px;
@@ -76,7 +76,7 @@ h1 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
 }
 
@@ -146,7 +146,7 @@ h1 {
 }
 
 .bouton_commander {
-  background: linear-gradient(175deg, #cd7c4d, #9a61dd);
+  background: linear-gradient(175deg, #c7acac, #965fe9);
   color: white;
   border-color: transparent;
   font-size: 15px;
@@ -154,7 +154,6 @@ h1 {
   font-weight: bold;
   border-radius: 48px;
   width: 95%; 
-  box-shadow: 0 0 16px #00000061;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -165,7 +164,7 @@ h1 {
 
 /*Footer*/
 footer {
-  background-color: #9e63ce;
+  background-color: #965fe9;
   color: white;
   display: flex;
   flex-direction: column;
@@ -205,7 +204,7 @@ h3 {
 }
 
 .footer_social a:hover {
-  color: #cd7c4d;
+  color:black;
 }
 
 footer a {
