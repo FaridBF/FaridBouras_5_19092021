@@ -26,7 +26,7 @@ nav {
 
 .logo_header {
   display: flex;
-  height: 200px;
+  height: 150px;
 }
 
 .logo img {
@@ -37,10 +37,10 @@ nav {
 .navigation {
   display: flex;
   list-style: none;
-  color: #904aca;
+  color: #9e63ce;
   justify-content: center;
   cursor: pointer;
-  width: 15%;
+  width: auto;
 }
 
 .onglet_accueil{
@@ -49,7 +49,7 @@ nav {
 
 /*Section 1 - Présentation*/
 .accueil {
-  background-color: #904aca;
+  background-color: #9e63ce;
   color: white;
   height: 225px;
   margin-bottom: 20px;
@@ -76,12 +76,14 @@ h1 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .produits {
+  display: flex;
   width: 30%;
-  height: 300px;
+  height: 280px;
   border: solid 4px;
   border-color: white;
   box-shadow: 0 0 16px #0000002e;
@@ -89,6 +91,9 @@ h1 {
   background: white;
   margin: 0px 0px 60px 30px;
   overflow: hidden;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 .produits:hover,
@@ -98,8 +103,8 @@ h1 {
 }
 
 .image_produit {
-  width: 100%;
-  height: 70%;
+  width: 60%;
+  height: 100%;
 }
 
 .image_produit img {
@@ -112,17 +117,55 @@ h1 {
   display: flex;
   flex-direction: column;
   margin-left: 6px;
-  margin-top: -15px;
+  width: 45%;
 }
 
-.prix {
-  margin-top: -30px;
-  margin-bottom: -24px;
+.descriptif_produit{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+}
+
+.descriptif_produit p{
+  width: 100%;
+  text-align: center;
+}
+
+.prix{
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.bouton{
+  display: flex;
+  justify-content: center;
+}
+
+.bouton_commander {
+  background: linear-gradient(175deg, #cd7c4d, #9a61dd);
+  color: white;
+  border-color: transparent;
+  font-size: 15px;
+  height: 45px;
+  font-weight: bold;
+  border-radius: 48px;
+  width: 95%; 
+  box-shadow: 0 0 16px #00000061;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
 }
 
 /*Footer*/
 footer {
-  background-color: #904aca;
+  background-color: #9e63ce;
   color: white;
   display: flex;
   flex-direction: column;
@@ -162,7 +205,7 @@ h3 {
 }
 
 .footer_social a:hover {
-  color: black;
+  color: #cd7c4d;
 }
 
 footer a {
