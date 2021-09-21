@@ -1,3 +1,4 @@
+/*Page panier*/
 body {
   min-width: 350px;
   max-width: 1900px;
@@ -70,96 +71,12 @@ h1 {
   margin-top: 15px;
 }
 
-/*Section 2 - Produits*/
+/*Section 2 - Produits - les boutons*/
 
-.total_produits {
+.les_boutons {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-  margin-top: 60px;
-}
-
-.produits {
-  display: flex;
-  width: 80%;
-  height: 380px;
-  border: solid 4px;
-  border-color: white;
-  box-shadow: 0 0 16px #0000002e;
-  border-radius: 16px;
-  background: white;
-  margin: 0px 0px 60px 30px;
-  overflow: hidden;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-}
-
-.produits:hover,
-.produits_p:hover {
-  transform: scale(1.05);
-  transition-duration: 0.1s;
-}
-
-.image_produit {
-  width: 60%;
-  height: 100%;
-}
-
-.image_produit img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
-.texte_produit {
-  display: flex;
-  flex-direction: column;
-  margin-left: 6px;
-  width: 45%;
-}
-
-/*Page produit*/
-.selection {
-  display: block;
-  width: 100%;
-  padding: 5px;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
-  background-repeat: no-repeat;
-  background-size: 16px 12px;
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-  appearance: none;
-}
-
-.descriptif_produit {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  justify-content: center;
-}
-
-.descriptif_produit p {
-  width: 100%;
-  text-align: center;
-}
-
-.quantite {
-  font-weight: bold;
-  font-size: 25px;
-}
-.prix {
-  display: flex;
-  justify-content: center;
-  font-size: 18px;
+  justify-content: space-evenly;
 }
 
 .bouton {
@@ -171,11 +88,11 @@ h1 {
   background: linear-gradient(175deg, #c7acac, #965fe9);
   color: white;
   border-color: transparent;
-  font-size: 15px;
-  height: 45px;
+  font-size: 12px;
+  height: 35px;
   font-weight: bold;
-  border-radius: 48px;
-  width: 95%;
+  border-radius: 10px;
+  width: 145px;
   display: flex;
   justify-content: center;
   align-items: center;

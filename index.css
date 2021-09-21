@@ -1,3 +1,4 @@
+/*Page Accueil*/
 body {
   min-width: 350px;
   max-width: 1900px;
@@ -43,7 +44,7 @@ nav {
   width: auto;
 }
 
-.onglet_accueil{
+.onglet_accueil {
   margin-right: 15px;
 }
 
@@ -120,7 +121,7 @@ h1 {
   width: 45%;
 }
 
-.descriptif_produit{
+.descriptif_produit {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -129,18 +130,18 @@ h1 {
   justify-content: center;
 }
 
-.descriptif_produit p{
+.descriptif_produit p {
   width: 100%;
   text-align: center;
 }
 
-.prix{
+.prix {
   display: flex;
   justify-content: center;
   font-size: 18px;
 }
 
-.bouton{
+.bouton {
   display: flex;
   justify-content: center;
 }
@@ -153,7 +154,7 @@ h1 {
   height: 45px;
   font-weight: bold;
   border-radius: 48px;
-  width: 95%; 
+  width: 95%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -204,7 +205,7 @@ h3 {
 }
 
 .footer_social a:hover {
-  color:black;
+  color: black;
 }
 
 footer a {
