@@ -234,3 +234,105 @@ footer a {
   font-size: 20px;
   margin: 25px;
 }
+
+@media screen and (min-width: 758px) and (max-width: 1520px) {
+  /*Ici, le CSS s'appliquera aux écrans de 758px minimum à 1520px maximum */
+  .total_produits {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .produits {
+    width: 75%;
+    height: 300px;
+  }
+  .texte_produit {
+    width: 50%;
+  }
+  h2 {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  footer a {
+    margin: 15px;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 758px) {
+  /*Ici, le CSS s'appliquera aux écrans de 0px minimum à 758maximum */
+  .logo_header {
+    display: flex;
+    height: 90px;
+  }
+  .navigation {
+    margin-right: 10px;
+  }
+  h1 {
+    display: flex;
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .accueil {
+    margin-bottom: 0;
+  }
+  .accueil p {
+    font-size: 18px;
+  }
+  .total_produits {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin-top: 0;
+  }
+  .produits {
+    width: 90%;
+    height: 240px;
+    margin: 15px;
+  }
+  .image_produit {
+    width: 60%;
+  }
+  .texte_produit {
+    width: 52%;
+  }
+  h2 {
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+  }
+  .prix {
+    font-size: 14px;
+  }
+  .bouton_commander {
+    font-size: 10px;
+    width: 100px;
+    height: 30px;
+  }
+  footer {
+    overflow-x: hidden;
+  }
+
+  .footer-content {
+    margin-bottom: 15px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    flex-wrap: nowrap;
+  }
+  .container ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h3 {
+    font-size: 17px;
+  }
+}

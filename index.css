@@ -120,6 +120,10 @@ h1 {
   margin-left: 6px;
   width: 45%;
 }
+h2 {
+  display: flex;
+  justify-content: center;
+}
 
 .descriptif_produit {
   display: flex;
@@ -154,7 +158,7 @@ h1 {
   height: 45px;
   font-weight: bold;
   border-radius: 48px;
-  width: 95%;
+  width: 155px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -214,17 +218,32 @@ footer a {
   margin: 25px;
 }
 
-@media screen and (min-width: 758px) and (max-width: 1024px) {
-  /*Ici, le CSS s'appliquera aux écrans de 768px minimum à 1024px maximum */
+@media screen and (min-width: 758px) and (max-width: 1520px) {
+  /*Ici, le CSS s'appliquera aux écrans de 758px minimum à 1520px maximum */
   .total_produits {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+  .produits {
+    width: 75%;
+    height: 300px;
+  }
+  .texte_produit {
+    width: 50%;
+  }
+  h2 {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  footer a {
+    margin: 15px;
+  }
 }
 
-@media screen and (min-width: 280px) and (max-width: 758px) {
-  /*Ici, le CSS s'appliquera aux écrans de 350px minimum à 758maximum */
+@media screen and (min-width: 0px) and (max-width: 758px) {
+  /*Ici, le CSS s'appliquera aux écrans de 0px minimum à 758maximum */
   .logo_header {
     display: flex;
     height: 90px;
@@ -261,18 +280,20 @@ footer a {
     width: 60%;
   }
   .texte_produit {
-    width: 50%;
+    width: 52%;
   }
   h2 {
     font-size: 17px;
+    display: flex;
+    justify-content: center;
   }
   .prix {
     font-size: 14px;
   }
   .bouton_commander {
     font-size: 10px;
-    width: 75%;
-    height: 25px;
+    width: 100px;
+    height: 30px;
   }
   footer {
     overflow-x: hidden;
