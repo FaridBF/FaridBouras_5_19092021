@@ -53,9 +53,9 @@ nav {
   background-color: #965fe9;
   color: white;
   height: 225px;
-  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 h1 {
@@ -68,7 +68,6 @@ h1 {
   display: flex;
   justify-content: center;
   font-size: 30px;
-  margin-top: 15px;
 }
 
 /*Section 2 - Produits*/
@@ -79,6 +78,7 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+  margin-top: 20px;
 }
 
 .produits {
@@ -90,7 +90,7 @@ h1 {
   box-shadow: 0 0 16px #0000002e;
   border-radius: 16px;
   background: white;
-  margin: 0px 0px 60px 30px;
+  margin: 0px 0px 20px 20px;
   overflow: hidden;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -212,4 +212,89 @@ footer a {
   color: white;
   font-size: 20px;
   margin: 25px;
+}
+
+@media screen and (min-width: 758px) and (max-width: 1024px) {
+  /*Ici, le CSS s'appliquera aux écrans de 768px minimum à 1024px maximum */
+  .total_produits {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 280px) and (max-width: 758px) {
+  /*Ici, le CSS s'appliquera aux écrans de 350px minimum à 758maximum */
+  .logo_header {
+    display: flex;
+    height: 90px;
+  }
+  .navigation {
+    margin-right: 10px;
+  }
+  h1 {
+    display: flex;
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .accueil {
+    margin-bottom: 0;
+  }
+  .accueil p {
+    font-size: 18px;
+  }
+  .total_produits {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin-top: 0;
+  }
+  .produits {
+    width: 90%;
+    height: 240px;
+    margin: 15px;
+  }
+  .image_produit {
+    width: 60%;
+  }
+  .texte_produit {
+    width: 50%;
+  }
+  h2 {
+    font-size: 17px;
+  }
+  .prix {
+    font-size: 14px;
+  }
+  .bouton_commander {
+    font-size: 10px;
+    width: 75%;
+    height: 25px;
+  }
+  footer {
+    overflow-x: hidden;
+  }
+
+  .footer-content {
+    margin-bottom: 15px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    flex-wrap: nowrap;
+  }
+  .container ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h3 {
+    font-size: 17px;
+  }
 }

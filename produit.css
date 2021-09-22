@@ -55,6 +55,7 @@ nav {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 h1 {
@@ -67,7 +68,6 @@ h1 {
   display: flex;
   justify-content: center;
   font-size: 30px;
-  margin-top: 15px;
 }
 
 /*Section 2 - Produits*/
