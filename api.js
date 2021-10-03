@@ -2,7 +2,7 @@
 const urlAPI = "http://localhost:3000/api/cameras";
 
 // Fonction pour afficher les données de l'API dans le DOM
-function createProduct(value) {
+function createProduct(data) {
   // récupérer div .total_produits
   let total_produits = document.querySelector(".total_produits");
   //créer div .produit
@@ -17,8 +17,8 @@ function createProduct(value) {
 
   // Création d'une balise img pour l'image
   let image = document.createElement("img");
-  image.src = value[0].imageUrl; // ajout de l'attribut src avec la valeur récupérée de l'API
-  image.alt = value[0].name; // ajout du nom du produit dans alt
+  image.src = data.imageUrl; // ajout de l'attribut src avec la valeur récupérée de l'API
+  image.alt = data.name; // ajout du nom du produit dans alt
   image_produit.appendChild(image); // ajout de la balise en tant qu'enfant dans la div parent
 
   //créer div .texte_produit
@@ -30,7 +30,7 @@ function createProduct(value) {
   let nom_produit = document.createElement("h2");
   nom_produit.classList.add("nom_produit");
   texte_produit.appendChild(nom_produit);
-  nom_produit.innerHTML = value[0].name;
+  nom_produit.innerHTML = data.name;
 
   // créer div
   let descriptif_container = document.createElement("div");
@@ -40,7 +40,7 @@ function createProduct(value) {
   let descriptif_produit = document.createElement("p");
   descriptif_produit.classList.add("descriptif_produit");
   descriptif_container.appendChild(descriptif_produit);
-  descriptif_produit.innerHTML = value[0].description;
+  descriptif_produit.innerHTML = data.description;
 
   // créer div
   let prix_container = document.createElement("div");
@@ -50,7 +50,7 @@ function createProduct(value) {
   let prix = document.createElement("p");
   prix.classList.add("prix");
   prix_container.appendChild(prix);
-  prix.innerHTML = value[0].price;
+  prix.innerHTML = data.price;
 
   // créer div .bouton
   let bouton_conteneur = document.createElement("div");
@@ -80,10 +80,11 @@ function getProducts() {
       }
     })
     // Récupérer la valeur de la réponse du JSON
-    .then(function (value) {
-      // console.log("MES PRODUITS", value[0]);
-      console.log(value);
-      createProduct(value);
+    .then(function (data) {
+      // Pour chaque élément du tableau de données, créer un produit à afficher en HTML
+      // Boucler sur le tableau reçu de l'API et pour chaque element du tableau lancer la fonction createProduct
+      // avec en paramètre chaque element du tableau
+      data.forEach((element) => createProduct(element));
     });
 }
 
