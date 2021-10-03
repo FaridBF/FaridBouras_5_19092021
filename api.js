@@ -50,7 +50,7 @@ function createProduct(data) {
   let prix = document.createElement("p");
   prix.classList.add("prix");
   prix_container.appendChild(prix);
-  prix.innerHTML = data.price;
+  prix.innerHTML = (data.price / 100).toFixed(2);
 
   // créer div .bouton
   let bouton_conteneur = document.createElement("div");
