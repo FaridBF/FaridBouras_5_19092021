@@ -32,15 +32,68 @@ function createProduct(data) {
   texte_produit.appendChild(nom_produit);
   nom_produit.innerHTML = data.name;
 
+  // créer div .select_reference (enfant de .texte_produit)
+  let select_reference = document.createElement("div");
+  select_reference.classList.add("select_reference");
+  texte_produit.appendChild(select_reference);
+
+  // créer une class selection (enfant de .select_reference)
+  let selection = document.createElement("select");
+  selection.classList.add("selection");
+  select_reference.appendChild(selection);
+
+  // boucler sur le tableau data.lenses
+  // pour chaque élément de data.lenses
+  data.lenses.forEach((element) => {
+    // --- creer une balise option
+    selection_option = document.createElement("option");
+    // assigner à cette balise la valeur de l'élément
+    selection_option.innerHTML = element;
+    // ajouter à la balise option un attribut value et lui assigner aussi la valeur de l'élément
+    selection_option.value = element;
+    // ajouter cette balise en tant qu'enfant de la balise select
+    selection.appendChild(selection_option);
+  });
+
   // créer div
   let descriptif_container = document.createElement("div");
   texte_produit.appendChild(descriptif_container);
 
-  // créer p .descriptif_produit (enfant de div)
+  // créer p .descriptif_produit (enfant de div .descriptif_container)
   let descriptif_produit = document.createElement("p");
   descriptif_produit.classList.add("descriptif_produit");
   descriptif_container.appendChild(descriptif_produit);
   descriptif_produit.innerHTML = data.description;
+
+  // créer div .quantite_container (enfant de .texte_produit)
+  let quantite_container = document.createElement("div");
+  quantite_container.classList.add("quantite_container");
+  texte_produit.appendChild(quantite_container);
+
+  // créer p .descriptif_quantite (enfant de .quantite_container)
+  let descriptif_quantite = document.createElement("p");
+  descriptif_quantite.classList.add("descriptif_quantite");
+  quantite_container.appendChild(descriptif_quantite);
+  descriptif_quantite.innerHTML = "Quantité : ";
+
+  // créer une class quantite (enfant de .quantite_container)
+  let quantite = document.createElement("select");
+  quantite.classList.add("quantite");
+  quantite_container.appendChild(quantite);
+  console.log(data.lenses);
+
+  // boucler sur le tableau array afin d'indiquer la quantité
+  const array = ["1", "2", "3", "4", "5"];
+  array.forEach((element) => {
+    // creer une balise quantite_option
+    quantite_option = document.createElement("option");
+    // assigner à cette balise la valeur de l'élément
+    quantite_option.innerHTML = element;
+    // ajouter à la balise option un attribut value et lui assigner aussi la valeur de l'élément
+    quantite_option.value = element;
+    // ajouter cette balise en tant qu'enfant de la balise quantite
+    quantite.appendChild(quantite_option);
+  });
 
   // créer div
   let prix_container = document.createElement("div");
@@ -85,6 +138,7 @@ function getProducts() {
       // Boucler sur le tableau reçu de l'API et pour chaque element du tableau lancer la fonction createProduct
       // avec en paramètre chaque element du tableau
       data.forEach((element) => createProduct(element));
+      console.log(data);
     })
     .catch(function (err) {
       // console.log("Une erreur est survenue : ", err);

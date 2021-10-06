@@ -81,7 +81,7 @@ h1 {
   margin-top: 60px;
 }
 
-.produits {
+.produit {
   display: flex;
   width: 80%;
   height: 380px;
@@ -97,8 +97,8 @@ h1 {
   align-items: center;
 }
 
-.produits:hover,
-.produits_p:hover {
+.produit:hover,
+.produit_p:hover {
   transform: scale(1.05);
   transition-duration: 0.1s;
 }
@@ -152,17 +152,31 @@ h1 {
   text-align: center;
 }
 
-.quantite {
-  font-weight: bold;
-  font-size: 25px;
+.quantite_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
+
+.quantite {
+  font-size: 18px;
+  margin-left: 10px;
+  height: 40px;
+  width: 8%;
+}
+
 .prix {
   display: flex;
   justify-content: center;
   font-size: 18px;
+  font-weight: bold;
 }
 
 .bouton {
+  display: flex;
+  justify-content: center;
+}
+.bouton_conteneur {
   display: flex;
   justify-content: center;
 }
@@ -175,7 +189,7 @@ h1 {
   height: 45px;
   font-weight: bold;
   border-radius: 48px;
-  width: 95%;
+  width: 225px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -242,9 +256,9 @@ footer a {
     flex-direction: column;
     align-items: center;
   }
-  .produits {
+  .produit {
     width: 75%;
-    height: 300px;
+    height: 400px;
   }
   .texte_produit {
     width: 50%;
@@ -253,6 +267,9 @@ footer a {
     font-size: 30px;
     display: flex;
     justify-content: center;
+  }
+  .quantite {
+    width: 20%;
   }
   footer a {
     margin: 15px;
@@ -274,7 +291,6 @@ footer a {
     align-items: center;
     justify-content: center;
   }
-
   .accueil {
     margin-bottom: 0;
   }
@@ -288,13 +304,13 @@ footer a {
     align-content: center;
     margin-top: 0;
   }
-  .produits {
-    width: 90%;
-    height: 240px;
+  .produit {
+    width: 94%;
+    height: 400px;
     margin: 15px;
   }
   .image_produit {
-    width: 60%;
+    width: 75%;
   }
   .texte_produit {
     width: 52%;
@@ -306,20 +322,20 @@ footer a {
   }
   .prix {
     font-size: 14px;
+    font-weight: bold;
+  }
+  .quantite {
+    width: 30%;
+  }
+  .bouton_conteneur {
+    display: flex;
+    justify-content: center;
   }
   .bouton_commander {
     font-size: 10px;
     width: 100px;
-    height: 30px;
+    height: 40px;
   }
-  footer {
-    overflow-x: hidden;
-  }
-
-  .footer-content {
-    margin-bottom: 15px;
-  }
-
   .container {
     display: flex;
     flex-direction: column;
@@ -334,5 +350,11 @@ footer a {
   }
   h3 {
     font-size: 17px;
+  }
+  footer {
+    overflow-x: hidden;
+  }
+  .footer-content {
+    margin-bottom: 15px;
   }
 }
