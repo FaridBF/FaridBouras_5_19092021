@@ -143,6 +143,8 @@ h2 {
   display: flex;
   justify-content: center;
   font-size: 18px;
+  margin: 0;
+  font-weight: bold;
 }
 
 .bouton_conteneur {
@@ -237,6 +239,9 @@ footer a {
     display: flex;
     justify-content: center;
   }
+  .bouton_conteneur {
+    margin-top: 15px;
+  }
   footer a {
     margin: 15px;
   }
@@ -282,6 +287,9 @@ footer a {
   .texte_produit {
     width: 52%;
   }
+  .descriptif_produit {
+    margin: 0;
+  }
   h2 {
     font-size: 17px;
     display: flex;
@@ -289,6 +297,10 @@ footer a {
   }
   .prix {
     font-size: 14px;
+    font-weight: bold;
+  }
+  .bouton_conteneur {
+    margin: 0;
   }
   .bouton_commander {
     font-size: 10px;
