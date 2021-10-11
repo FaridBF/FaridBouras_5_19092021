@@ -72,7 +72,7 @@ h1 {
 
 /*Section 2 - Produits*/
 
-.total_produits {
+.conteneur_produit {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -255,7 +255,7 @@ footer a {
 
 @media screen and (min-width: 758px) and (max-width: 1520px) {
   /*Ici, le CSS s'appliquera aux écrans de 758px minimum à 1520px maximum */
-  .total_produits {
+  .conteneur_produit {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -301,7 +301,7 @@ footer a {
   .accueil p {
     font-size: 18px;
   }
-  .total_produits {
+  .conteneur_produit {
     display: flex;
     flex-direction: column;
     align-items: center;
