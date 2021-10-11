@@ -152,6 +152,10 @@ h2 {
   justify-content: center;
 }
 
+.bouton_conteneur a {
+  text-decoration: none;
+}
+
 .bouton_commander {
   background: linear-gradient(175deg, #c7acac, #965fe9);
   color: white;

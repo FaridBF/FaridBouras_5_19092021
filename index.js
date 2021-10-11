@@ -57,16 +57,16 @@ function createProduct(data) {
   bouton_conteneur.classList.add("bouton_conteneur");
   texte_produit.appendChild(bouton_conteneur);
 
-  // création de la balise form avec action vers produit.html
-  let form_bouton = document.createElement("form");
-  form_bouton.action = "produit.html";
-  bouton_conteneur.appendChild(form_bouton);
+  // création du link vers produit.html
+  let link = document.createElement("a");
+  link.href = "produit.html?id=" + data._id;
+  bouton_conteneur.appendChild(link);
 
-  // création du button comme enfant de parent form
+  // création du button comme enfant de parent link
   let bouton_commander = document.createElement("button");
   bouton_commander.classList.add("bouton_commander");
-  bouton_commander.innerHTML = "Acheter ce produit";
-  form_bouton.appendChild(bouton_commander);
+  bouton_commander.innerText = "Acheter ce produit";
+  link.appendChild(bouton_commander);
 }
 
 // Récupérer produits depuis l'API
@@ -93,3 +93,15 @@ function getProducts() {
 }
 
 getProducts();
+
+// Récupération de la chaîne de requête dans l'URL
+const queryString = window.location.search;
+console.log(queryString);
+
+// // Méthode pour extraire l'ID - constructor URL searchParams
+let SearchParams = new URLSearchParams(queryString);
+let id = SearchParams.get("id");
+
+// data._id.element(id).then(function (element) {
+//   console.log(element);
+// });

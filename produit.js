@@ -80,7 +80,7 @@ function createProduct(data) {
   let quantite = document.createElement("select");
   quantite.classList.add("quantite");
   quantite_container.appendChild(quantite);
-  console.log(data.lenses);
+  // console.log(data.lenses);
 
   // boucler sur le tableau array afin d'indiquer la quantité
   const array = ["1", "2", "3", "4", "5"];
@@ -110,16 +110,16 @@ function createProduct(data) {
   bouton_conteneur.classList.add("bouton_conteneur");
   texte_produit.appendChild(bouton_conteneur);
 
-  // création de la balise form avec action vers produit.html
-  let form_bouton = document.createElement("form");
-  form_bouton.action = "produit.html";
-  bouton_conteneur.appendChild(form_bouton);
+  // création du link vers produit.html
+  let link = document.createElement("a");
+  link.href = "produit.html?id=" + data._id;
+  bouton_conteneur.appendChild(link);
 
-  // création du button comme enfant de parent form
+  // création du button comme enfant de parent link
   let bouton_commander = document.createElement("button");
   bouton_commander.classList.add("bouton_commander");
-  bouton_commander.innerHTML = "Acheter ce produit";
-  form_bouton.appendChild(bouton_commander);
+  bouton_commander.innerText = "Acheter ce produit";
+  link.appendChild(bouton_commander);
 }
 
 // Récupérer produits depuis l'API
@@ -138,7 +138,7 @@ function getProducts() {
       // Boucler sur le tableau reçu de l'API et pour chaque element du tableau lancer la fonction createProduct
       // avec en paramètre chaque element du tableau
       data.forEach((element) => createProduct(element));
-      console.log(data);
+      // console.log(data);
     })
     .catch(function (err) {
       // console.log("Une erreur est survenue : ", err);
