@@ -1,14 +1,24 @@
-// Déclaration de l'URL de l'api
-const urlAPI = "http://localhost:3000/api/cameras";
+// ------------- RECUPERATION ID PRODUIT DEPUIS URL ------------- //
+// Récupération de la chaîne de requête dans l'URL
+const queryString = window.location.search;
 
+// // Méthode pour extraire l'ID - constructor URL searchParams
+let SearchParams = new URLSearchParams(queryString);
+let product_id = SearchParams.get("id");
+// ------------- FIN RECUPERATION ID PRODUIT DEPUIS URL ------------- //
+
+// Déclaration de l'URL de l'api
+const urlApiProduct = "http://localhost:3000/api/cameras/";
+
+//-------------------------------------------------------------- //
 // Fonction pour afficher les données de l'API dans le DOM
 function createProduct(data) {
-  // récupérer div .total_produits
-  let total_produits = document.querySelector(".total_produits");
+  // récupérer div .conteneur_produit
+  let conteneur_produit = document.querySelector(".conteneur_produit");
   //créer div .produit
   let produit = document.createElement("div");
   produit.classList.add("produit");
-  total_produits.appendChild(produit);
+  conteneur_produit.appendChild(produit);
 
   // Création de la div image_produit
   let image_produit = document.createElement("div");
@@ -122,28 +132,25 @@ function createProduct(data) {
   link.appendChild(bouton_commander);
 }
 
-// Récupérer produits depuis l'API
-function getProducts() {
-  // utiliser fetch pour récupération données API
-  fetch(urlAPI)
+// Fonction pour afficher le produit de l'id demandé
+function getProduct(product_id) {
+  fetch(urlApiProduct + product_id)
     .then(function (res) {
       // Si tout est ok
       if (res.status === 200) {
         return res.json();
       }
     })
-    // Récupérer la valeur de la réponse du JSON
     .then(function (data) {
-      // Pour chaque élément du tableau de données, créer un produit à afficher en HTML
-      // Boucler sur le tableau reçu de l'API et pour chaque element du tableau lancer la fonction createProduct
-      // avec en paramètre chaque element du tableau
-      data.forEach((element) => createProduct(element));
-      // console.log(data);
+      createProduct(data);
     })
     .catch(function (err) {
-      // console.log("Une erreur est survenue : ", err);
-      // alert("Une erreur est survenue : ", err);
+      console.log("Une erreur est survenue : ", err);
+      alert("Une erreur est survenue lors du chargement des données.");
     });
 }
 
-getProducts();
+//-------------------------------------------------------------- //
+
+// Appel à la fonction pour récupérer les données du produit demandé depuis l'API
+getProduct(product_id);

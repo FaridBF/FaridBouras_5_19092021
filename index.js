@@ -87,21 +87,9 @@ function getProducts() {
       data.forEach((element) => createProduct(element));
     })
     .catch(function (err) {
-      // console.log("Une erreur est survenue : ", err);
-      // alert("Une erreur est survenue : ", err);
+      console.log("Une erreur est survenue : ", err);
+      alert("Une erreur est survenue lors du chargement des données.");
     });
 }
 
 getProducts();
-
-// Récupération de la chaîne de requête dans l'URL
-const queryString = window.location.search;
-console.log(queryString);
-
-// // Méthode pour extraire l'ID - constructor URL searchParams
-let SearchParams = new URLSearchParams(queryString);
-let id = SearchParams.get("id");
-
-// data._id.element(id).then(function (element) {
-//   console.log(element);
-// });
