@@ -5,12 +5,12 @@ const queryString = window.location.search;
 // // Méthode pour extraire l'ID - constructor URL searchParams
 let SearchParams = new URLSearchParams(queryString);
 let product_id = SearchParams.get("id");
+
 // ------------- FIN RECUPERATION ID PRODUIT DEPUIS URL ------------- //
 
 // Déclaration de l'URL de l'api
 const urlApiProduct = "http://localhost:3000/api/cameras/";
 
-//-------------------------------------------------------------- //
 // Fonction pour afficher les données de l'API dans le DOM
 function createProduct(data) {
   // récupérer div .conteneur_produit
@@ -130,6 +130,11 @@ function createProduct(data) {
   bouton_commander.classList.add("bouton_commander");
   bouton_commander.innerText = "Acheter ce produit";
   link.appendChild(bouton_commander);
+  // Création d'un évènment click sur bouton_commander pour ajout produit
+  bouton_commander.addEventListener("click", function () {
+    let shoppingCart = new ShoppingCart();
+    shoppingCart.add(data);
+  });
 }
 
 // Fonction pour afficher le produit de l'id demandé
