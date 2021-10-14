@@ -35,7 +35,7 @@
         <section>
             <div class="accueil">
                 <h1>Orinoco</h1>
-                <p>Récapitulatif de votre panier</p>
+                <p>Mon panier</p>
                 </h1>
             </div>
         </section>
@@ -43,19 +43,12 @@
         <section>
             <div class="tableau">
                 <table class="shopping">
-                    <tr>
-                        <td>Produit</td>
-                        <td>Nom</td>
-                        <td>Option</td>
-                        <td>Quantité</td>
-                        <td>Prix</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr class="shopping_details">
+                        <td class="produit_image_panier">Produit<img class="image_panier" src="" alt=""></img></td>
+                        <td class="reference_panier">Nom</td>
+                        <td class="select_reference">Option</td>
+                        <td class="quantite_panier">Quantité</td>
+                        <td class="prix_panier">Prix</td>
                     </tr>
                 </table>
             </div>
@@ -71,17 +64,13 @@
             </div>
             <!-- Section 2 - Formulaire-->
             <form action="formulaire" method="post">
-                <div>
-                    <label for="name">Prénom :</label>
-                    <input type="text" id="name" name="user_name" placehorder="Julien">
-                </div>
-                <div>
+                <div class="style_champs">
                     <label for="name">Nom :</label>
                     <input type="text" id="name" name="user_name" placehorder="Bruel">
                 </div>
                 <div>
-                    <label for="mail">E-mail :</label>
-                    <input type="email" id="mail" name="user_mail" placehorder="orinico@gmail.com">
+                    <label for="name">Prénom :</label>
+                    <input type="text" id="name" name="user_name" placehorder="Julien">
                 </div>
                 <div>
                     <label for="mail">Adresse :</label>
@@ -90,6 +79,10 @@
                 <div>
                     <label for="mail">Ville :</label>
                     <input type="email" id="mail" name="user_mail" placeholder="Reims">
+                </div>
+                <div>
+                    <label for="mail">E-mail :</label>
+                    <input type="email" id="mail" name="user_mail" placehorder="orinico@gmail.com">
                 </div>
             </form>
             <div class="case">
@@ -135,6 +128,7 @@
             </div>
         </div>
     </footer>
+    <!-- <script src="shoppingCart.js"></script> -->
     <script src="panier.js"></script>
 </body>
 

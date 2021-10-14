@@ -73,12 +73,11 @@ h1 {
 /*Section 2 - Produits - les boutons*/
 .tableau {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 table {
-  border-collapse: collapse;
   width: 300px;
-  margin-bottom: 20px;
 }
 td {
   table-layout: fixed;
@@ -86,8 +85,17 @@ td {
 th,
 td {
   border: 1px solid black;
-  padding: 10px;
+  padding: 5px;
 }
+
+.produit_image_panier {
+  width: 100%;
+}
+
+img {
+  height: 150px;
+}
+
 /*Section 2 - Produits - les boutons*/
 .les_boutons {
   display: flex;
@@ -120,8 +128,15 @@ td {
 form {
   display: flex;
   margin: 20px;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.style_champs {
+  display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .case {
