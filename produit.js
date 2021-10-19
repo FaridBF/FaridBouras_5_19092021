@@ -12,7 +12,9 @@ let product_id = SearchParams.get("id");
 const urlApiProduct = "http://localhost:3000/api/cameras/";
 
 // Fonction pour afficher les données de l'API dans le DOM
-function createProduct(data) {
+function displayProduct(data) {
+  console.log(data);
+
   // récupérer div .conteneur_produit
   let conteneur_produit = document.querySelector(".conteneur_produit");
   //créer div .produit
@@ -122,13 +124,14 @@ function createProduct(data) {
 
   // création du link vers produit.html
   let link = document.createElement("a");
-  link.href = "produit.html?id=" + data._id;
+  // link.href = "produit.html?id=" + data._id;
+  link.href = "panier.html";
   bouton_conteneur.appendChild(link);
 
   // création du button comme enfant de parent link
   let bouton_commander = document.createElement("button");
   bouton_commander.classList.add("bouton_commander");
-  bouton_commander.innerText = "Acheter ce produit";
+  bouton_commander.innerText = "Ajouter au panier";
   link.appendChild(bouton_commander);
   // Création d'un évènment click sur bouton_commander pour ajout produit
   bouton_commander.addEventListener("click", function () {
@@ -147,7 +150,7 @@ function getProduct(product_id) {
       }
     })
     .then(function (data) {
-      createProduct(data);
+      displayProduct(data);
     })
     .catch(function (err) {
       console.log("Une erreur est survenue : ", err);

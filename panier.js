@@ -3,17 +3,13 @@ const urlAPI = "http://localhost:3000/api/cameras";
 
 // Fonction pour afficher les données de l'API dans le DOM
 function createProduct(data) {
-  // récupérer div tableau
-  let tableau = document.querySelector(".tableau");
-  //créer table shopping
-  let shopping = document.createElement("table");
-  shopping.classList.add("shopping");
-  tableau.appendChild(shopping);
+  // récupérer div tableau_contenu
+  let tableau_contenu = document.querySelector("tbody");
 
   //créer shopping_details enfant de table shopping
   let shopping_details = document.createElement("tr");
   shopping_details.classList.add("shopping_details");
-  shopping.appendChild(shopping_details);
+  tableau_contenu.appendChild(shopping_details);
 
   // Création de la td produit_image_panier
   let produit_image_panier = document.createElement("td");
@@ -41,7 +37,7 @@ function createProduct(data) {
   selection.classList.add("selection");
   select_reference.appendChild(selection);
 
-  // boucler sur le tableau data.lenses
+  // boucler sur le tableau_contenu data.lenses
   // pour chaque élément de data.lenses
   data.lenses.forEach((element) => {
     // --- creer une balise option
@@ -70,7 +66,7 @@ function createProduct(data) {
   quantite_panier.classList.add("quantite_panier");
   quantite_container_panier.appendChild(quantite_panier);
 
-  // boucler sur le tableau array afin d'indiquer la quantité
+  // boucler sur le tableau_contenu array afin d'indiquer la quantité
   const array = ["1", "2", "3", "4", "5"];
   array.forEach((element) => {
     // creer une balise quantite_option
@@ -121,3 +117,29 @@ console.log(shoppingCart.content);
 
 shoppingCart.content.forEach((element) => createProduct(element));
 // ------------- FIN CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
+
+// add(oneProduct) {
+//   // j'ajoute un produit
+//   let alreadyExists = false;
+//   this.content.forEach(function (oneElement) {
+//     // permet de faire le tour de l'ensemble des éléments dans notre panier
+//     if (oneElement.data._id === oneProduct.data._id) {
+//       // si sur chaque élement sur lequel on itère l'id de l'élément correspond à l'id du produit a ajouté
+//       alreadyExists = true; // condition permettant d'indiquer qu'elle a trouvé une quantité à incrémenter
+//       oneElement.quantite_option_panier += 1; // alors j'incrémente la quantité de 1 si la condition  précèdente est remplie
+//     }
+//   });
+//   if (alreadyExists === false)
+//     // s'il n'est pas dans ma condition de ma quantité, elle n'a donc pas trouvé la valeur, de quantité à incrémenter, donc ajout
+//     var save = {
+//       // Variable qui contient tous les éléments que je souhaite sauvegarder
+//       reference_panier: oneProduct.data.name,
+//       // imageUrl: oneProduct.data.imageUrl,
+//       // quantite_option_panier: 1, // quantité que je mets à 1 par default
+//       // price: oneProduct.data.price,
+//       _id: oneProduct.data._id,
+//     };
+//   this.getShoppingContent();
+//   this.content.push(save); //j'envoie l'ensemble des éléments sauvegarder dans mon panier en faisant le push du produit en question
+//   localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // transforme JSON en string
+// }

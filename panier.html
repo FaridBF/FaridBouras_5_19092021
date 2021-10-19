@@ -43,13 +43,18 @@
         <section>
             <div class="tableau">
                 <table class="shopping">
-                    <tr class="shopping_details">
-                        <td class="produit_image_panier">Produit<img class="image_panier" src="" alt=""></img></td>
-                        <td class="reference_panier">Nom</td>
-                        <td class="select_reference">Option</td>
-                        <td class="quantite_panier">Quantité</td>
-                        <td class="prix_panier">Prix</td>
-                    </tr>
+                    <thead>
+                        <tr class="shopping_details">
+                            <th class="produit_image_panier">Produit<img class="image_panier" src="" alt=""></img></th>
+                            <th class="reference_panier">Nom</th>
+                            <th class="select_reference">Option</th>
+                            <th class="quantite_panier">Quantité</th>
+                            <th class="prix_panier">Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr class="product"></tr> -->
+                    </tbody>
                 </table>
             </div>
             <div class="les_boutons">
@@ -58,37 +63,36 @@
                         panier</button></a>
                 </div>
                 <div class="bouton">
-                    <a href="produit.html" button class="bouton_commander" type="button">Vider mon
+                    <a href="produit.html" button class="bouton_commander" id="clear" type="button">Vider mon
                         panier</button></a>
                 </div>
             </div>
             <!-- Section 2 - Formulaire-->
-            <form action="formulaire" method="post">
+            <form id="contact-form" method="post">
                 <div class="style_champs">
                     <label for="name">Nom :</label>
-                    <input type="text" id="name" name="user_name" placehorder="Bruel">
+                    <input type="text" name="firstname" placehorder="Bruel">
                 </div>
                 <div>
                     <label for="name">Prénom :</label>
-                    <input type="text" id="name" name="user_name" placehorder="Julien">
+                    <input type="text" name="lastname" placehorder="Julien">
                 </div>
                 <div>
                     <label for="mail">Adresse :</label>
-                    <input type="email" id="mail" name="user_mail" placehorder="18 rue orinico">
+                    <input type="text" name="address" placehorder="18 rue orinico">
                 </div>
                 <div>
                     <label for="mail">Ville :</label>
-                    <input type="email" id="mail" name="user_mail" placeholder="Reims">
+                    <input type="text" name="city" placeholder="Reims">
                 </div>
                 <div>
                     <label for="mail">E-mail :</label>
-                    <input type="email" id="mail" name="user_mail" placehorder="orinico@gmail.com">
+                    <input type="email" name="email" placehorder="orinico@gmail.com">
+                </div>
+                <div>
+                    <button type="submit" class="bouton_commander">Passer la commande</button>
                 </div>
             </form>
-            <div class="case">
-                <input type="checkbox" id="cocher" name="cocher" checked>
-                <label for="cocher">J'accepte de partager mes informations avec Orinico.</label>
-            </div>
         </section>
     </main>
     <!-- Footer -->
@@ -128,8 +132,9 @@
             </div>
         </div>
     </footer>
-    <!-- <script src="shoppingCart.js"></script> -->
     <script src="panier.js"></script>
+    <script src="formulaire.js"></script>
+
 </body>
 
 </html>
