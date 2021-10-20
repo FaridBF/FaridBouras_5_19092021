@@ -11,7 +11,7 @@ let product_id = SearchParams.get("id");
 // Déclaration de l'URL de l'api
 const urlApiProduct = "http://localhost:3000/api/cameras/";
 
-// Fonction pour afficher les données de l'API dans le DOM
+//  -------------  Fonction pour afficher les données de l'API dans le DOM  -------------  //
 function displayProduct(data) {
   console.log("data", data);
 
@@ -51,7 +51,7 @@ function displayProduct(data) {
 
   // créer une class selection (enfant de .select_reference)
   let selection = document.createElement("select");
-  selection.classList.add("selection");
+  selection.setAttribute("id", "selection");
   select_reference.appendChild(selection);
 
   // boucler sur le tableau data.lenses
@@ -92,7 +92,6 @@ function displayProduct(data) {
   let quantite = document.createElement("select");
   quantite.classList.add("quantite");
   quantite_container.appendChild(quantite);
-  // console.log(data.lenses);
 
   // boucler sur le tableau array afin d'indiquer la quantité
   const array = ["1", "2", "3", "4", "5"];
@@ -140,7 +139,7 @@ function displayProduct(data) {
   });
 }
 
-// Fonction pour afficher le produit de l'id demandé
+//  -------------  Fonction pour afficher le produit de l'id demandé  -------------  //
 function getProduct(product_id) {
   fetch(urlApiProduct + product_id)
     .then(function (res) {

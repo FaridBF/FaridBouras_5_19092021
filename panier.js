@@ -32,23 +32,12 @@ function createProduct(data) {
   select_reference.classList.add("select_reference");
   shopping_details.appendChild(select_reference);
 
-  // créer une class selection (enfant de .select_reference)
-  let selection = document.createElement("select");
-  selection.classList.add("selection");
-  select_reference.appendChild(selection);
-
-  // boucler sur le tableau_contenu data.lenses
-  // pour chaque élément de data.lenses
-  // data.lenses.forEach((element) => {
-  //   // --- creer une balise option
-  //   selection_option = document.createElement("option");
-  //   // assigner à cette balise la valeur de l'élément
-  //   selection_option.innerHTML = element;
-  //   // ajouter à la balise option un attribut value et lui assigner aussi la valeur de l'élément
-  //   selection_option.value = element;
-  //   // ajouter cette balise en tant qu'enfant de la balise select
-  //   selection.appendChild(selection_option);
-  // });
+  // créer une class quantite_panier
+  let option_select = document.createElement("p");
+  option_select.classList.add("option_select");
+  select_reference.appendChild(option_select);
+  option_select.innerHTML = data.lenses;
+  // getSelectValue("#selection");
 
   // créer div .quantite_container_panier (enfant de .shopping_details)
   let quantite_container_panier = document.createElement("td");
@@ -61,11 +50,34 @@ function createProduct(data) {
   quantite_container_panier.appendChild(quantite_panier);
   quantite_panier.innerHTML = data.quantity;
 
+  // créer une class supprimer
+  let supprimer = document.createElement("td");
+  supprimer.classList.add("supprimer");
+  shopping_details.appendChild(supprimer);
+
+  //création du button dans la class supprimer
+  let bouton_supprimer = document.createElement("button");
+  bouton_supprimer.classList.add("bouton_supprimer");
+  supprimer.appendChild(bouton_supprimer);
+  bouton_supprimer.innerHTML = "Supprimer";
+  // Création d'un évènment click sur bouton_supprimer pour supprimer produit
+  bouton_supprimer.addEventListener("click", function () {
+    console.log(data);
+    let shoppingCart = new ShoppingCart();
+    shoppingCart.remove(data);
+  });
+
   // créer prix enfant de shoppings details
   let prix_panier = document.createElement("td");
   prix_panier.classList.add("prix_panier");
   shopping_details.appendChild(prix_panier);
   prix_panier.innerHTML = (data.price / 100).toFixed(2) + " €";
+
+  // créer prix_soustotal_panier enfant de shoppings details
+  let prix_soustotal_panier = document.createElement("td");
+  prix_soustotal_panier.classList.add("prix_soustotal_panier");
+  shopping_details.appendChild(prix_soustotal_panier);
+  prix_soustotal_panier.innerHTML = (data.price / 100).toFixed(2) + " €";
 }
 
 // ------------- CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
@@ -82,6 +94,28 @@ class ShoppingCart {
     } else {
       this.content = JSON.parse(this.content); // transform ce qui est récup en string en json
     }
+  }
+
+  // // Lien avec la fonction suppression dans le fichier suppresion.js pour la gestion du bouton supprimer
+  remove(oneProduct) {
+    this.getShoppingContent();
+    let indexToRemove = null; // création d'une variable par defaut en null
+    // index est le numéro de placement de l'item et one item contient toutes les infos
+    this.content.forEach(function (oneItem, index) {
+      // boucler sur l'ensemble de notre shoppint cart
+      if (oneProduct._id === oneItem._id) {
+        indexToRemove = index; // de là si il trouve, il définit notre variable et ça peu importe le chiffre 0, 1, 2....
+      }
+    });
+    // si indexToremove n'est pas rester à null, il faut qu'il est trouvé quelques choses
+    if (indexToRemove !== null) {
+      // si on trouve l'élément dans notre panier le produit qui correspond
+      this.content.splice(indexToRemove, 1); // l'élément que l'on souhaite enlever il est à la place indexToRemove
+      // splice : pour enlever un élément / 1 n'est pas la notion de quantité, va enlever la ligne concernée dans le tableau
+      // une fois que c'est fait, on va demander à faire un save à la condition qu'il est fait une modifs sinon ça sert à rien
+    }
+    localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // permet de stocker dans le local storage les informations du tableau
+    location.reload();
   }
 
   add(oneProduct) {
@@ -105,6 +139,7 @@ class ShoppingCart {
         _id: oneProduct._id,
         name: oneProduct.name,
         imageUrl: oneProduct.imageUrl,
+        lenses: oneProduct.lenses,
         quantity: 1, //quantité que je mets à 1 par default
         price: oneProduct.price,
       };
@@ -120,3 +155,22 @@ console.log("shoppingCart.content", shoppingCart.content);
 
 shoppingCart.content.forEach((element) => createProduct(element));
 // ------------- FIN CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
+
+// Fonction pour les calculs du sous totals
+// // calcul du total
+// function total_panier() {
+//   let total_produit = 0;
+//   oneProduct.forEach((data) => {
+//     total_produit = total_produit + data.price * data.quantity;
+//   });
+//   return total_produit;
+// }
+
+// function addLenses(oneProduct) {
+//   const versionChoice = document.getElementById("option");
+//   for (let lenses of oneProduct.lenses) {
+//     versionChoice.innerHTML += `<option value="${lenses}">${lenses}</option>`;
+//   }
+// }
+
+// ***********************************
