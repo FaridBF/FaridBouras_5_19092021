@@ -63,34 +63,41 @@
                         panier</button></a>
                 </div>
                 <div class="bouton">
-                    <a href="produit.html" button class="bouton_commander" id="clear" type="button">Vider mon
-                        panier</button></a>
+                    <!-- <a href="produit.html" button class="bouton_commander" id="clear" type="button">Vider mon
+                        panier</button></a> -->
+                    <button class="bouton_commander" id="clear" type="button">Vider mon
+                        panier</button>
                 </div>
             </div>
             <!-- Section 2 - Formulaire-->
-            <form id="contact-form" method="post">
+            <form action="#" id="contact-form" method="post">
                 <div class="style_champs">
                     <label for="name">Nom :</label>
-                    <input type="text" name="firstname" placehorder="Bruel">
+                    <input type="text" id="nom" name="firstname" minlength="3" maxlength="15" value="Noé">
                 </div>
                 <div>
                     <label for="name">Prénom :</label>
-                    <input type="text" name="lastname" placehorder="Julien">
+                    <input type="text" id="prenom" name="lastname" minlength="3" maxlength="15" value="Bertrand">
                 </div>
                 <div>
                     <label for="mail">Adresse :</label>
-                    <input type="text" name="address" placehorder="18 rue orinico">
+                    <input type="text" id="adresse" name="address" minlength="3" maxlength="30"
+                        value="12 rue des champs">
+                </div>
+                <div>
+                    <label for="mail">Code postal:</label>
+                    <input type="text" id="cp" name="city" minlength="5" maxlength="5" value="75000">
                 </div>
                 <div>
                     <label for="mail">Ville :</label>
-                    <input type="text" name="city" placeholder="Reims">
+                    <input type="text" id="ville" minlength="3" maxlength="30" name="city" value="Paris">
                 </div>
                 <div>
-                    <label for="mail">E-mail :</label>
-                    <input type="email" name="email" placehorder="orinico@gmail.com">
+                    <label for="email">E-mail :</label>
+                    <input type="email" id="mail" name="email" minlength="3" maxlength="30" value="orinico@gmail.com">
                 </div>
                 <div>
-                    <button type="submit" class="bouton_commander">Passer la commande</button>
+                    <input class="bouton_commander" type="submit" value="Commander">
                 </div>
             </form>
         </section>
