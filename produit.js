@@ -13,7 +13,7 @@ const urlApiProduct = "http://localhost:3000/api/cameras/";
 
 // Fonction pour afficher les données de l'API dans le DOM
 function displayProduct(data) {
-  console.log(data);
+  console.log("data", data);
 
   // récupérer div .conteneur_produit
   let conteneur_produit = document.querySelector(".conteneur_produit");
