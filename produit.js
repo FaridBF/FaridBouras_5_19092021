@@ -123,9 +123,19 @@ function displayProduct(data) {
 
   // création du link vers produit.html
   let link = document.createElement("a");
-  // link.href = "produit.html?id=" + data._id;
   link.href = "panier.html";
   bouton_conteneur.appendChild(link);
+
+  // let quantite_selectionnee = 1;
+  // récupérer la quantité sélectionnée
+  quantite.addEventListener("change", function () {
+    // dans les options du select, récupérer la valeur (value) de l'index sélectionné (quantite.selectedIndex)
+    // et l'affecter à la balise <select> donc à quantite.value
+    quantite.value = quantite.options[quantite.selectedIndex].value; // selectedIndex et value sont des variables natives à JS
+    // const quantite_selectionnee = quantite.options[quantite.selectedIndex].value;
+    // console.log(quantite_selectionnee);
+    // return quantite_selectionnee;
+  });
 
   // création du button comme enfant de parent link
   let bouton_commander = document.createElement("button");
@@ -135,7 +145,8 @@ function displayProduct(data) {
   // Création d'un évènment click sur bouton_commander pour ajout produit
   bouton_commander.addEventListener("click", function () {
     let shoppingCart = new ShoppingCart();
-    shoppingCart.add(data);
+    // ajouter un produit au panier avec data (objet produit) et quantite
+    shoppingCart.add(data, parseInt(quantite.value));
   });
 }
 
