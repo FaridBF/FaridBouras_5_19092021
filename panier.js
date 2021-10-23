@@ -160,7 +160,7 @@ class ShoppingCart {
     location.reload();
   }
 
-  add(oneProduct) {
+  add(oneProduct, quantite_selectionnee) {
     this.getShoppingContent();
     //récupération du contenu du panier avant qu'il ne puisse pouvoir rentrer dans la fonction
     // j'ajoute un produit
@@ -171,7 +171,7 @@ class ShoppingCart {
       if (oneElement._id === oneProduct._id) {
         // si sur chaque élement sur lequel on itère l'id de l'élément correspond à l'id du produit a ajouté
         alreadyExists = true; // condition permettant d'indiquer qu'elle a trouvé une quantité à incrémenter
-        oneElement.quantity += 1; // alors j'incrémente la quantité de 1 si la condition  précèdente est remplie
+        oneElement.quantity += quantite_selectionnee; // alors j'incrémente la quantité avec celle reçue depuis produit.html si la condition  précèdente est remplie
       }
     });
     if (alreadyExists === false) {
@@ -182,7 +182,7 @@ class ShoppingCart {
         name: oneProduct.name,
         imageUrl: oneProduct.imageUrl,
         lenses: oneProduct.lenses,
-        quantity: 1, //quantité que je mets à 1 par default
+        quantity: quantite_selectionnee,
         price: oneProduct.price,
       };
       this.content.push(productToSave); //j'envoie l'ensemble des éléments sauvegarder dans mon panier en faisant le push du produit en question
