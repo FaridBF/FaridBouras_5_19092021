@@ -1,8 +1,13 @@
 // Déclaration de l'URL de l'api
 const urlAPI = "http://localhost:3000/api/cameras";
 
+// créer un tableau vide de sous totaux pour le remplir au fur et à mesure de l'ajout des produits
+let tableau_sous_totaux = [];
+// console.log(tableau_sous_totaux);
+
 // Fonction pour afficher les données de l'API dans le DOM
 function createProduct(data) {
+  // crée un tableau vide de sous-totaux pour y ajouter chaque sous-totaux
   // récupérer div tableau_contenu
   let tableau_contenu = document.querySelector("tbody");
 
@@ -77,9 +82,25 @@ function createProduct(data) {
   let prix_soustotal_panier = document.createElement("td");
   prix_soustotal_panier.classList.add("prix_soustotal_panier");
   shopping_details.appendChild(prix_soustotal_panier);
-  prix_soustotal_panier.innerHTML =
-    data.quantity * (data.price / 100).toFixed(2) + " €"; // multiplication data.quantity par data price afin d'obtenir le montant du sous total de l'élément correspondant
+  let resultat_sous_total = data.quantity * (data.price / 100).toFixed(2);
+  prix_soustotal_panier.innerHTML = resultat_sous_total + " €"; // multiplication data.quantity par data price afin d'obtenir le montant du sous total de l'élément correspondant
+  // remplir le tableau_sous_totaux par chaque sous-total créé
+  tableau_sous_totaux.push(resultat_sous_total);
+}
 
+// Fonction pour les calculs des sous-totaux
+// // calcul du total
+function get_result_total_final(tableau_sous_totaux) {
+  // faire la somme des éléments du tableau en les accumulant
+  // curr: élément courant
+  const resultat_total_final = tableau_sous_totaux.reduce(
+    (acc, curr) => acc + curr
+  );
+  return resultat_total_final;
+}
+
+// Fonction qui affiche le total final
+function display_total_final() {
   // Gestion du <tfoot>
   let tableau_total = document.querySelector("tfoot");
 
@@ -88,38 +109,15 @@ function createProduct(data) {
   shopping_total.classList.add("shopping_total");
   tableau_total.appendChild(shopping_total);
 
-  // // créer un total_final <th> de l'ensemble du panier
+  // créer un total_final <th> de l'ensemble du panier
   let total_final = document.createElement("th");
   total_final.classList.add("total_final");
   shopping_total.appendChild(total_final);
-  total_final.innerHTML =
-    "Total: " + data.quantity * (data.price / 100).toFixed(2) + " €";
-  // const total_array = ["0", "1", "2", "3", "4"];
-  // total_array.forEach((prix_soustotal_panier) => {
-  //   let total_final = document.createElement("th");
-  //   total_final.innerHTML = "Total: " + total_array + " €";
-  //   shopping_total.appendChild(total_final);
-  // });
+  // stocker le résultat de la fonction get_result_total_final dans une variable
+  let resultat_total = get_result_total_final(tableau_sous_totaux);
+  // afficher le résultat dans le DOM avec la valeur de la variable
+  total_final.innerHTML = "Total: " + resultat_total + " €";
 }
-
-// const total_array = ["0", "1", "2", "3", "4"];
-// total_array.forEach((prix_soustotal_panier) => {
-//   let total_final = document.createElement("th");
-//   total_final.innerHTML =
-//     "Total: " + data.quantity * (data.price / 100).toFixed(2) + " €";
-//   shopping_total.appendChild(total_final);
-// });
-
-// Fonction pour les calculs des sous-totaux
-// // calcul du total
-// function total_final() {
-//   prix_soustotal_panier.forEach((prix_panier) => {
-//     total_final =
-//       data.quantity * (data.price / 100).toFixed(2) +
-//       (data.price / 100).toFixed(2);
-//   });
-//   return total_final;
-// }
 
 // ------------- CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
 class ShoppingCart {
@@ -195,9 +193,11 @@ class ShoppingCart {
 // Lien avec le fichier class.js (permet d'afficher les éléments dans panier)
 let shoppingCart = new ShoppingCart();
 shoppingCart.getShoppingContent();
-console.log("shoppingCart.content", shoppingCart.content);
+// console.log("shoppingCart.content", shoppingCart.content);
 
 shoppingCart.content.forEach((element) => createProduct(element));
+// Afficher le résultat final qui appelera la fonction de calcul du total
+display_total_final();
 // ------------- FIN CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
 
 // function addLenses(oneProduct) {
