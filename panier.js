@@ -77,14 +77,55 @@ function createProduct(data) {
   let prix_soustotal_panier = document.createElement("td");
   prix_soustotal_panier.classList.add("prix_soustotal_panier");
   shopping_details.appendChild(prix_soustotal_panier);
-  prix_soustotal_panier.innerHTML = (data.price / 100).toFixed(2) + " €";
+  prix_soustotal_panier.innerHTML =
+    data.quantity * (data.price / 100).toFixed(2) + " €"; // multiplication data.quantity par data price afin d'obtenir le montant du sous total de l'élément correspondant
+
+  // Gestion du <tfoot>
+  let tableau_total = document.querySelector("tfoot");
+
+  // créer un shopping_total <tr> de l'ensemble du panier
+  let shopping_total = document.createElement("tr");
+  shopping_total.classList.add("shopping_total");
+  tableau_total.appendChild(shopping_total);
+
+  // // créer un total_final <th> de l'ensemble du panier
+  let total_final = document.createElement("th");
+  total_final.classList.add("total_final");
+  shopping_total.appendChild(total_final);
+  total_final.innerHTML =
+    "Total: " + data.quantity * (data.price / 100).toFixed(2) + " €";
+  // const total_array = ["0", "1", "2", "3", "4"];
+  // total_array.forEach((prix_soustotal_panier) => {
+  //   let total_final = document.createElement("th");
+  //   total_final.innerHTML = "Total: " + total_array + " €";
+  //   shopping_total.appendChild(total_final);
+  // });
 }
+
+// const total_array = ["0", "1", "2", "3", "4"];
+// total_array.forEach((prix_soustotal_panier) => {
+//   let total_final = document.createElement("th");
+//   total_final.innerHTML =
+//     "Total: " + data.quantity * (data.price / 100).toFixed(2) + " €";
+//   shopping_total.appendChild(total_final);
+// });
+
+// Fonction pour les calculs des sous-totaux
+// // calcul du total
+// function total_final() {
+//   prix_soustotal_panier.forEach((prix_panier) => {
+//     total_final =
+//       data.quantity * (data.price / 100).toFixed(2) +
+//       (data.price / 100).toFixed(2);
+//   });
+//   return total_final;
+// }
 
 // ------------- CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
 class ShoppingCart {
   constructor() {
-    this.nameInStorage = "shopping-cart";
-    this.content = [];
+    this.nameInStorage = "shopping-cart"; // la clé afin de faire le lien avec mon local storage
+    this.content = []; // il s'agit de ma liste (tableau) -  c'est le contenu de mon panier
   }
 
   getShoppingContent() {
@@ -96,24 +137,27 @@ class ShoppingCart {
     }
   }
 
-  // // Lien avec la fonction suppression dans le fichier suppresion.js pour la gestion du bouton supprimer
   remove(oneProduct) {
-    this.getShoppingContent();
+    this.getShoppingContent(); //récupération du contenu du panier avant qu'il ne puisse pouvoir rentrer dans la fonction
     let indexToRemove = null; // création d'une variable par defaut en null
     // index est le numéro de placement de l'item et one item contient toutes les infos
     this.content.forEach(function (oneItem, index) {
-      // boucler sur l'ensemble de notre shoppint cart
+      // boucler sur l'ensemble de notre shoppint cart pour récupérer l'index de l'objet pour lequel quantité -= 1
       if (oneProduct._id === oneItem._id) {
         indexToRemove = index; // de là si il trouve, il définit notre variable et ça peu importe le chiffre 0, 1, 2....
       }
     });
-    // si indexToremove n'est pas rester à null, il faut qu'il est trouvé quelques choses
+    // si indexToremove n'est pas rester à null
     if (indexToRemove !== null) {
       // si on trouve l'élément dans notre panier le produit qui correspond
-      this.content.splice(indexToRemove, 1); // l'élément que l'on souhaite enlever il est à la place indexToRemove
-      // splice : pour enlever un élément / 1 n'est pas la notion de quantité, va enlever la ligne concernée dans le tableau
-      // une fois que c'est fait, on va demander à faire un save à la condition qu'il est fait une modifs sinon ça sert à rien
+      this.content[indexToRemove].quantity -= 1; // index du produit à supprimer dans le tableau
+      if (this.content[indexToRemove].quantity === 0) {
+        // si la quantité de l'élément ayant indextoremove = 0
+        this.content.splice(indexToRemove, 1); // l'élément que l'on souhaite enlever il est à la place indexToRemove
+        // splice : pour enlever un élément / 1 n'est pas la notion de quantité, va enlever la ligne concernée dans le tableau
+      }
     }
+    // une fois que c'est fait, on va demander à faire un save à la condition qu'il est fait une modifs sinon ça sert à rien
     localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // permet de stocker dans le local storage les informations du tableau
     location.reload();
   }
@@ -156,21 +200,9 @@ console.log("shoppingCart.content", shoppingCart.content);
 shoppingCart.content.forEach((element) => createProduct(element));
 // ------------- FIN CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
 
-// Fonction pour les calculs du sous totals
-// // calcul du total
-// function total_panier() {
-//   let total_produit = 0;
-//   oneProduct.forEach((data) => {
-//     total_produit = total_produit + data.price * data.quantity;
-//   });
-//   return total_produit;
-// }
-
 // function addLenses(oneProduct) {
 //   const versionChoice = document.getElementById("option");
 //   for (let lenses of oneProduct.lenses) {
 //     versionChoice.innerHTML += `<option value="${lenses}">${lenses}</option>`;
 //   }
 // }
-
-// ***********************************
