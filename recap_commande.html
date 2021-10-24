@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Récapitulatif de la commande</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="recap_commande.css">
     <script src="https://kit.fontawesome.com/05a4ddde0a.js" crossorigin="anonymous"></script>
 </head>
 
@@ -35,25 +35,47 @@
 
         <section>
             <div class="accueil">
-                <h1>Orinoco</h1>
-                <p>Récapitulatif de votre commande</p>
-                </h1>
+                <h1>Ma commande</h1>
+            </div>
+            <div class="ma_commande">
+                <p class="details_commande">Merci , votre commande n°......Identifiant de commande.......
+                    est validée ! </p>
+                <p class="details_commande">Votre facture pour un montant total de ......prix à mettre ici.......va vous
+                    être transmise par
+                    mail
+                    à : ........mail du formulaire........</p>
+                <p class="details_commande">On vous préviendra quand elle partira chez vous à l'adresse suivante :
+                <p class="details_commande">
+                    .......adresse du formulaire indiquée.......</p>
+                </p>
             </div>
         </section>
         <!-- Section 2 - Produits-->
         <section>
             <div class="total_produits">
-                <div class="produits">
-                    <div class="image_produit">
-                        <img src="" alt="">
-                    </div>
-                    <div class="texte_produit">
-                        <h2> Commande N°.... pour l'Appareil photo</h2>
-                        <div class="prix">
-                            <p>taille du produit:25mm <B>155 €</B></p>
-
-                        </div>
-                    </div>
+                <div class="accueil">
+                    <h2> Liste des articles commandés</h2>
+                </div>
+                <div class="tableau">
+                    <table class="shopping">
+                        <thead>
+                            <tr class="shopping_details">
+                                <th class="produit_image_panier">Produit<img class="image_panier" src="" alt=""></img>
+                                </th>
+                                <th class="reference_panier">Nom</th>
+                                <th class="select_reference">Option</th>
+                                <th class="quantite_panier">Quantité</th>
+                                <th class="supprimer">Supprimer de mon panier</th>
+                                <th class="prix_panier">Prix</th>
+                                <th class="prix_soustotal_panier">Sous-total</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tableau_contenu">
+                        </tbody class="tableau_contenu">
+                        <tfoot class="tableau_total">
+                            <tr class="shopping_total"></tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </section>
@@ -98,6 +120,8 @@
             </div>
         </div>
     </footer>
+    <script src="panier.js"></script>
+    <script src="produit.js"></script>
 </body>
 
 </html>
