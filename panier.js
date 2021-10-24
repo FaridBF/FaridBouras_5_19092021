@@ -5,7 +5,7 @@ const urlAPI = "http://localhost:3000/api/cameras";
 let tableau_sous_totaux = [];
 // console.log(tableau_sous_totaux);
 
-// Fonction pour afficher les données de l'API dans le DOM
+// ------------- Fonction pour afficher les données de l'API dans le DOM ------------- //
 function createProduct(data) {
   // crée un tableau vide de sous-totaux pour y ajouter chaque sous-totaux
   // récupérer div tableau_contenu
@@ -86,9 +86,17 @@ function createProduct(data) {
   prix_soustotal_panier.innerHTML = resultat_sous_total + " €"; // multiplication data.quantity par data price afin d'obtenir le montant du sous total de l'élément correspondant
   // remplir le tableau_sous_totaux par chaque sous-total créé
   tableau_sous_totaux.push(resultat_sous_total);
-}
 
-// Fonction pour les calculs des sous-totaux
+  // créer button pour vider totalement le tableau
+  let bouton_vider = document.querySelector("#bouton_vider");
+  bouton_vider.addEventListener("click", function () {
+    let shoppingCart = new ShoppingCart();
+    shoppingCart.emptyShoppingContent();
+  });
+}
+// ------------- Fin fonction pour afficher les données de l'API dans le DOM ------------- //
+
+// -------------  Fonction pour les calculs des sous-totaux ------------- //
 // // calcul du total
 function get_result_total_final(tableau_sous_totaux) {
   // faire la somme des éléments du tableau en les accumulant
@@ -100,8 +108,9 @@ function get_result_total_final(tableau_sous_totaux) {
   //La méthode reduce() applique une fonction qui est un « accumulateur » et qui traite chaque valeur d'une liste
   return resultat_total_final;
 }
+// ------------- Fin fonction pour les calculs des sous-totaux ------------- //
 
-// Fonction qui affiche le total final
+// ------------- Fonction qui affiche le total final ------------- //
 function display_total_final() {
   // Gestion du <tfoot>
   let tableau_total = document.querySelector("tfoot");
@@ -120,23 +129,34 @@ function display_total_final() {
   // afficher le résultat dans le DOM avec la valeur de la variable
   total_final.innerHTML = "Total: " + resultat_total + " €";
 }
+// ------------- Fin fonction qui affiche le total final ------------- //
 
-// ------------- CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
+// ------------- DEBUT CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
 class ShoppingCart {
   constructor() {
     this.nameInStorage = "shopping-cart"; // la clé afin de faire le lien avec mon local storage
     this.content = []; // il s'agit de ma liste (tableau) -  c'est le contenu de mon panier
   }
 
+  // méthode qui récupère le contenu de localStorage et l'affecte à this.content (attribut)
   getShoppingContent() {
     this.content = localStorage.getItem(this.nameInStorage);
     if (this.content === null) {
       this.content = [];
     } else {
-      this.content = JSON.parse(this.content); // transform ce qui est récup en string en json
+      this.content = JSON.parse(this.content); // transform le json récupéré en objet JS
     }
   }
 
+  // méthode qui vide l'ensemble du panier
+  emptyShoppingContent() {
+    this.getShoppingContent(); // récupère contenu
+    this.content.splice(0, this.content.length); // vide
+    localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // permet de stocker dans le local storage les informations du tableau
+    location.reload();
+  }
+
+  // méthode qui supprime un élément un à un
   remove(oneProduct) {
     this.getShoppingContent(); //récupération du contenu du panier avant qu'il ne puisse pouvoir rentrer dans la fonction
     let indexToRemove = null; // création d'une variable par defaut en null
@@ -192,12 +212,15 @@ class ShoppingCart {
     localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // transforme JSON en string
   }
 }
+// ------------- FIN CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
+
 // Lien avec le fichier class.js (permet d'afficher les éléments dans panier)
 let shoppingCart = new ShoppingCart();
 shoppingCart.getShoppingContent();
 // console.log("shoppingCart.content", shoppingCart.content);
 
 shoppingCart.content.forEach((element) => createProduct(element));
-// Afficher le résultat final qui appelera la fonction de calcul du total
-display_total_final();
-// ------------- FIN CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
+// Si contenu du panier n'est pas vide, afficher le résultat final qui appelera la fonction de calcul du total
+if (shoppingCart.content.length != 0) {
+  display_total_final();
+}
