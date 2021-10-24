@@ -62,9 +62,13 @@
                 </table>
             </div>
             <div class="les_boutons">
-                <div class="bouton">
-                    <a href="produit.html" button class="bouton_commander" type="button">Valider mon
-                        panier</button></a>
+                <div class="bouton_conteneur">
+                    <button class="bouton" onclick="window.location.href = 'produit.html';">Valider mon
+                        panier</button>
+                </div>
+                <div class="bouton_conteneur">
+                    <button class="bouton" id="bouton_vider">Vider mon
+                        panier</button>
                 </div>
             </div>
             <!-- Section 2 - Formulaire-->
@@ -94,8 +98,8 @@
                     <label for="email">E-mail :</label>
                     <input type="email" id="mail" name="email" minlength="3" maxlength="30" value="orinico@gmail.com">
                 </div>
-                <div>
-                    <input class="bouton_commander" type="submit" value="Commander">
+                <div class="bouton_conteneur">
+                    <button class="bouton" onclick="window.location.href = 'produit.html';">Commander</button>
                 </div>
             </form>
         </section>

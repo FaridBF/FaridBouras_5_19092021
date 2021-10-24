@@ -103,12 +103,12 @@ img {
   justify-content: space-evenly;
 }
 
-.bouton {
+.bouton_conteneur {
   display: flex;
   justify-content: center;
 }
 
-.bouton_commander {
+.bouton {
   background: linear-gradient(175deg, #c7acac, #965fe9);
   color: white;
   border-color: transparent;
@@ -276,7 +276,7 @@ footer a {
   .prix {
     font-size: 14px;
   }
-  .bouton_commander {
+  .bouton {
     font-size: 10px;
     width: 100px;
     height: 30px;
