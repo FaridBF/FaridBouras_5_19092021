@@ -87,11 +87,18 @@ function createProduct(data) {
   // remplir le tableau_sous_totaux par chaque sous-total créé
   tableau_sous_totaux.push(resultat_sous_total);
 
-  // créer button pour vider totalement le tableau
+  // // récupération du bouton_vider dans le html pour vider totalement le tableau
   let bouton_vider = document.querySelector("#bouton_vider");
   bouton_vider.addEventListener("click", function () {
     let shoppingCart = new ShoppingCart();
     shoppingCart.emptyShoppingContent();
+  });
+
+  // récupération du bouton_valider dans le html pour valider mon panier dans le but de faire afficher le formulaire
+  let bouton_valider = document.querySelector("#bouton_valider");
+  bouton_valider.addEventListener("click", function () {
+    let shoppingCart = new ShoppingCart();
+    shoppingCart.formButtonValidate();
   });
 }
 // ------------- Fin fonction pour afficher les données de l'API dans le DOM ------------- //
@@ -210,6 +217,41 @@ class ShoppingCart {
       this.content.push(productToSave); //j'envoie l'ensemble des éléments sauvegarder dans mon panier en faisant le push du produit en question
     }
     localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // transforme JSON en string
+  }
+  // méthode pour insérer la template formulaire
+  formButtonValidate() {
+    this.getShoppingContent(); // récupère contenu
+    const formulaire = document.querySelector("#contact-form"); // nouvelle variable = à l'ID du formulaire récupéré afin de générer le template formulaire
+    formulaire.innerHTML = `
+      <div class="style_champs">
+          <label for="name">Nom :</label>
+          <input type="text" id="nom" name="firstname" minlength="3" maxlength="15" value="Noé">
+      </div>
+      <div>
+          <label for="name">Prénom :</label>
+          <input type="text" id="prenom" name="lastname" minlength="3" maxlength="15" value="Bertrand">
+      </div>
+      <div>
+          <label for="mail">Adresse :</label>
+          <input type="text" id="adresse" name="address" minlength="3" maxlength="30"
+              value="12 rue des champs">
+      </div>
+      <div>
+          <label for="mail">Code postal:</label>
+          <input type="text" id="cp" name="city" minlength="5" maxlength="5" value="75000">
+      </div>
+      <div>
+          <label for="mail">Ville :</label>
+          <input type="text" id="ville" minlength="3" maxlength="30" name="city" value="Paris">
+      </div>
+      <div>
+          <label for="email">E-mail :</label>
+          <input type="email" id="mail" name="email" minlength="3" maxlength="30" value="orinico@gmail.com">
+      </div>
+      <div class="bouton_conteneur">
+      <button class="bouton" onclick="window.location.href = 'produit.html';">Commander</button>
+  </div>
+  </form>`;
   }
 }
 // ------------- FIN CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
