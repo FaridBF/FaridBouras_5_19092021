@@ -88,6 +88,15 @@ td {
   padding: 5px;
 }
 
+.total_final1,
+.total_final2,
+.total_final3,
+.total_final4,
+.total_final5,
+.total_final6 {
+  border: 0px;
+}
+
 .produit_image_panier {
   width: 100%;
 }

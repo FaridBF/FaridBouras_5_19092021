@@ -127,6 +127,26 @@ function display_total_final() {
   shopping_total.classList.add("shopping_total");
   tableau_total.appendChild(shopping_total);
 
+  // l'ensemble des th du tfoot afin d'avoir le total des sous-totaux au bon endroit
+  let total_final1 = document.createElement("th");
+  total_final1.classList.add("total_final1");
+  shopping_total.appendChild(total_final1);
+  let total_final2 = document.createElement("th");
+  total_final2.classList.add("total_final2");
+  shopping_total.appendChild(total_final2);
+  let total_final3 = document.createElement("th");
+  total_final3.classList.add("total_final3");
+  shopping_total.appendChild(total_final3);
+  let total_final4 = document.createElement("th");
+  total_final4.classList.add("total_final4");
+  shopping_total.appendChild(total_final4);
+  let total_final5 = document.createElement("th");
+  total_final5.classList.add("total_final5");
+  shopping_total.appendChild(total_final5);
+  let total_final6 = document.createElement("th");
+  total_final6.classList.add("total_final6");
+  shopping_total.appendChild(total_final6);
+
   // créer un total_final <th> de l'ensemble du panier
   let total_final = document.createElement("th");
   total_final.classList.add("total_final");
