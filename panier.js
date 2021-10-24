@@ -95,7 +95,9 @@ function get_result_total_final(tableau_sous_totaux) {
   // curr: élément courant
   const resultat_total_final = tableau_sous_totaux.reduce(
     (acc, curr) => acc + curr
+    // valeur précédente + valeur actuelle
   );
+  //La méthode reduce() applique une fonction qui est un « accumulateur » et qui traite chaque valeur d'une liste
   return resultat_total_final;
 }
 
@@ -160,7 +162,7 @@ class ShoppingCart {
     location.reload();
   }
 
-  add(oneProduct, quantite_selectionnee) {
+  add(oneProduct, quantite_selectionnee, lenses_selectionnee) {
     this.getShoppingContent();
     //récupération du contenu du panier avant qu'il ne puisse pouvoir rentrer dans la fonction
     // j'ajoute un produit
@@ -181,7 +183,7 @@ class ShoppingCart {
         _id: oneProduct._id,
         name: oneProduct.name,
         imageUrl: oneProduct.imageUrl,
-        lenses: oneProduct.lenses,
+        lenses: lenses_selectionnee,
         quantity: quantite_selectionnee,
         price: oneProduct.price,
       };
@@ -199,10 +201,3 @@ shoppingCart.content.forEach((element) => createProduct(element));
 // Afficher le résultat final qui appelera la fonction de calcul du total
 display_total_final();
 // ------------- FIN CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
-
-// function addLenses(oneProduct) {
-//   const versionChoice = document.getElementById("option");
-//   for (let lenses of oneProduct.lenses) {
-//     versionChoice.innerHTML += `<option value="${lenses}">${lenses}</option>`;
-//   }
-// }

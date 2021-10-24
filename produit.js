@@ -126,6 +126,12 @@ function displayProduct(data) {
   link.href = "panier.html";
   bouton_conteneur.appendChild(link);
 
+  // récupérer l'option séléctionnée du produit
+  selection.addEventListener("change", function () {
+    // dans les options du select, récupérer la valeur (value) de l'index sélectionné (quantite.selectedIndex)
+    selection.value = selection.options[selection.selectedIndex].value; // selectedIndex et value sont des variables natives à JS
+  });
+
   // let quantite_selectionnee = 1;
   // récupérer la quantité sélectionnée
   quantite.addEventListener("change", function () {
@@ -142,11 +148,17 @@ function displayProduct(data) {
   bouton_commander.classList.add("bouton_commander");
   bouton_commander.innerText = "Ajouter au panier";
   link.appendChild(bouton_commander);
+
+  // // création du link vers recap_commande.html
+  // let link_recap_commande = document.createElement("a");
+  // link_recap_commande.href = "recap_commande.html";
+  // bouton_commander.appendChild(link_recap_commande);
+
   // Création d'un évènment click sur bouton_commander pour ajout produit
   bouton_commander.addEventListener("click", function () {
     let shoppingCart = new ShoppingCart();
     // ajouter un produit au panier avec data (objet produit) et quantite
-    shoppingCart.add(data, parseInt(quantite.value));
+    shoppingCart.add(data, parseInt(quantite.value), selection.value);
   });
 }
 
