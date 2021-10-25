@@ -42,7 +42,6 @@ function createProduct(data) {
   option_select.classList.add("option_select");
   select_reference.appendChild(option_select);
   option_select.innerHTML = data.lenses;
-  // getSelectValue("#selection");
 
   // créer div .quantite_container_panier (enfant de .shopping_details)
   let quantite_container_panier = document.createElement("td");
@@ -101,6 +100,15 @@ function createProduct(data) {
     shoppingCart.formButtonValidate();
   });
 }
+
+// // gestion du bouton_valider_commander
+// let bouton_valider_commander = document.querySelector(
+//   "#bouton_valider_commander"
+// );
+// bouton_valider_commander.addEventListener("click", function () {
+//   let shoppingCart = new ShoppingCart();
+// });
+
 // ------------- Fin fonction pour afficher les données de l'API dans le DOM ------------- //
 
 // -------------  Fonction pour les calculs des sous-totaux ------------- //
@@ -269,20 +277,9 @@ class ShoppingCart {
           <input type="email" id="mail" name="email" minlength="3" maxlength="30" value="orinico@gmail.com">
       </div>
       <div class="bouton_conteneur">
-      <button class="bouton" onclick="window.location.href = 'produit.html';">Commander</button>
+      <button class="bouton" id="bouton_valider_commander">Commander</button>
   </div>
   </form>`;
   }
 }
 // ------------- FIN CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
-
-// Lien avec le fichier class.js (permet d'afficher les éléments dans panier)
-let shoppingCart = new ShoppingCart();
-shoppingCart.getShoppingContent();
-// console.log("shoppingCart.content", shoppingCart.content);
-
-shoppingCart.content.forEach((element) => createProduct(element));
-// Si contenu du panier n'est pas vide, afficher le résultat final qui appelera la fonction de calcul du total
-if (shoppingCart.content.length != 0) {
-  display_total_final();
-}
