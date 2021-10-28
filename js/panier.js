@@ -98,6 +98,8 @@ function createProduct(data) {
   bouton_valider.addEventListener("click", function () {
     let shoppingCart = new ShoppingCart();
     shoppingCart.formButtonValidate();
+    // console.log("appelle submitOrder");
+    submitOrder();
   });
 }
 
@@ -246,40 +248,41 @@ class ShoppingCart {
     }
     localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // transforme JSON en string
   }
-  // méthode pour insérer la template formulaire
+  // fonction reset: permet de vider le panier après utilisation du formulaire
+  reset() {
+    this.content = [];
+    // localStorage.setItem(this.nameInStorage, JSON.stringify(this.content));
+  }
+
+  // méthode pour insérer la template formulaire avec l'ensemble des champs demandés
   formButtonValidate() {
-    this.getShoppingContent(); // récupère contenu
+    this.getShoppingContent(); // récupère le contenu
     const formulaire = document.querySelector("#contact-form"); // nouvelle variable = à l'ID du formulaire récupéré afin de générer le template formulaire
     formulaire.innerHTML = `
-      <div class="style_champs">
-          <label for="name">Nom :</label>
-          <input type="text" id="nom" name="firstname" minlength="3" maxlength="15" value="Noé">
-      </div>
-      <div>
-          <label for="name">Prénom :</label>
-          <input type="text" id="prenom" name="lastname" minlength="3" maxlength="15" value="Bertrand">
-      </div>
-      <div>
-          <label for="mail">Adresse :</label>
-          <input type="text" id="adresse" name="address" minlength="3" maxlength="30"
-              value="12 rue des champs">
-      </div>
-      <div>
-          <label for="mail">Code postal:</label>
-          <input type="text" id="cp" name="city" minlength="5" maxlength="5" value="75000">
-      </div>
-      <div>
-          <label for="mail">Ville :</label>
-          <input type="text" id="ville" minlength="3" maxlength="30" name="city" value="Paris">
-      </div>
-      <div>
-          <label for="email">E-mail :</label>
-          <input type="email" id="mail" name="email" minlength="3" maxlength="30" value="orinico@gmail.com">
-      </div>
-      <div class="bouton_conteneur">
-      <button class="bouton" id="bouton_valider_commander">Commander</button>
-  </div>
-  </form>`;
+    <div class="style_champs">
+        <label for="lastName">Nom :</label>
+        <input type="text" id="lastName" name="lastName" minlength="2" maxlength="30" required>
+    </div>
+    <div>
+        <label for="firstName">Prénom :</label>
+        <input type="text" id="firstName" name="firstName" minlength="2" maxlength="30" required>
+    </div>
+    <div>
+        <label for="address">Adresse :</label>
+        <input type="text" id="address" name="address" minlength="3" maxlength="150" required>
+    </div>
+    <div>
+        <label for="city">Ville :</label>
+        <input type="text" id="city" minlength="2" maxlength="50" name="city" required>
+    </div>
+    <div>
+        <label for="email">E-mail :</label>
+        <input type="email" id="mail" name="email" minlength="3" maxlength="50" required>
+    </div>
+    <div class="bouton_conteneur">
+    <button type="submit" class="bouton" id="submit_order">Commander</button>
+    </div>
+    </form>`;
   }
 }
 // ------------- FIN CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //

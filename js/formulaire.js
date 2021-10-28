@@ -1,77 +1,117 @@
-// // Déclaration de l'URL de l'api
-// const urlAPI = "http://localhost:3000/api/cameras";
-
-// // Lien avec le fichier class.js (permet d'afficher les éléments dans panier)
-// let shoppingCart = new ShoppingCart();
-// shoppingCart.getShoppingContent();
-// console.log(shoppingCart.content);
-// shoppingCart.content.forEach((element) => createProduct(element));
-// ------------- FIN CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
-
-// on récupère l'ensemble des données de manière brut ce qui correspond à notre contactobject en données brut
-// let form = document.getElementById("contact-form"); // nom de notre formulaire dans la partie HTML (récupération via ID)
-// let formContact = new FormData(document.getElementById("contact-form")); // Form Data est une classe permettant de transformer le formulaire dans une forme utilisable facilement
-
-// let firstname = formContact.get("firstname"); // On récupère via les champs "name" dans le formulaire afin de récupérer la valeur dans le bonne forme (Formdata)
-// let lastname = formContact.get("lastname");
-// let city = formContact.get("city");
-// let address = formContact.get("address");
-// let email = formContact.get("email");
-
-// //Création du contact object via les données brut afin de formater l'ensemble pour l'API (il faut respecter exactement ce que demande l'API)
-// let contactObject = {
-//   firstName: firstname,
-//   lastName: lastname,
-//   city: city,
-//   address: address,
-//   email: email,
-// };
-
-// Récupération des ID, mise en place des écouteurs d'évènements
-document
-  .querySelector("#contact-form")
-  .addEventListener("submit", function (e) {
-    var nom = document.querySelector("#nom");
-    if (nom.value.length != 10) {
-      // alert("Merci de renseigner votre nom");
-      e.preventDefault; // pour empêcher la soumission du formulaire
-    }
+//  ------------- Fonction asynchrone pour envoyer la commande  ------------- //
+async function postCommand(contactDetails) {
+  let shoppingCart = new ShoppingCart();
+  shoppingCart.getShoppingContent();
+  // console.log(shoppingCart.content);
+  let products = []; // renvoyer un tableau vide par defaut
+  shoppingCart.content.forEach(function (product) {
+    products.push(product._id); // l'API demande les ID des products
   });
-document
-  .querySelector("#contact-form")
-  .addEventListener("submit", function (e) {
-    var prenom = document.querySelector("#prenom");
-    if (prenom.value.length != 10) {
-      // alert("Merci de renseigner votre prénom");
-      e.preventDefault; // pour empêcher la soumission du formulaire
-    }
+  // console.log("products: ", products);
+  let orderDetails = JSON.stringify({ contactDetails, products });
+  // console.log("orderDetails: ", orderDetails);
+  let response = await fetch(urlAPI + "/order", {
+    method: "POST",
+    headers: {
+      "content-Type": "application/json",
+    },
+    body: orderDetails,
   });
-document
-  .querySelector("#contact-form")
-  .addEventListener("submit", function (e) {
-    var adresse = document.querySelector("#adresse");
-    if (adresse.value.length != 10) {
-      // alert(
-      //   "Veuillez correctement renseigner le formulaire pour valider votre commande"
-      // );
-      e.preventDefault; // pour empêcher la soumission du formulaire
-    }
+  return response.json();
+}
+
+//  ------------- Fonction de gestion du bouton_valider_commander et du formulaire  ------------- //
+function submitOrder() {
+  let submit_order_form = document.querySelector("#submit_order");
+  // s'assurer que le bouton existe (n'est pas undefined ni null)
+  // if (typeof submit_order_form != undefined && submit_order_form != null) {
+  submit_order_form.addEventListener("click", function (e) {
+    e.preventDefault();
+    // on récupère l'ensemble des données de manière brut ce qui correspond à notre contactobject en données brut
+    let form = document.getElementById("contact-form"); // nom de notre formulaire dans la partie HTML (récupération via ID)
+    let formContact = new FormData(form); // Form Data est une classe JS permettant de transformer le formulaire dans une forme utilisable facilement
+
+    let firstName = formContact.get("firstName"); // On récupère via les champs "name" dans le formulaire afin de récupérer la valeur dans le bonne forme (Formdata)
+    let lastName = formContact.get("lastName");
+    let city = formContact.get("city");
+    let address = formContact.get("address");
+    let email = formContact.get("email");
+
+    //  Création du contactDetails via les données brut afin de formater l'ensemble pour l'API (il faut respecter exactement ce que demande l'API)
+    let contactDetails = {
+      firstName: firstName,
+      lastName: lastName,
+      city: city,
+      address: address,
+      email: email,
+    };
+    // console.log(contactDetails);
+    postCommand(contactDetails).then(function (response) {
+      console.log(response);
+      // window.location.href = "recap_commande.html"
+      // .then() car fonction postCommand est asynchrone
+      let shoppingCart = new ShoppingCart();
+      // cela fait appel à la fonction reset afin de pouvoir reload le panier une fois la commande passée
+      shoppingCart.reset();
+    });
   });
-document
-  .querySelector("#contact-form")
-  .addEventListener("submit", function (e) {
-    var ville = document.querySelector("#ville");
-    if (ville.value.length != 5) {
-      // alert("Merci de renseigner votre ville");
-      e.preventDefault; // pour empêcher la soumission du formulaire
-    }
-  });
-document
-  .querySelector("#contact-form")
-  .addEventListener("submit", function (e) {
-    var mail = document.querySelector("#mail");
-    if (mail.value.length != 5) {
-      alert("Merci de renseigner une adresse mail");
-      e.preventDefault; // pour empêcher la soumission du formulaire
-    }
-  });
+}
+// console.log(contactDetails);
+// Récupération des ID, mise en place des écouteurs d'évènements pour les règles de gestion
+
+// document
+//   .querySelector("#contact-form")
+//   .addEventListener("change", function (e) {
+//     let nom = document.querySelector("#lastName");
+//     if (!nom.value) {
+//       // alert("Merci de renseigner votre nom");
+//       e.preventDefault; // pour empêcher la soumission du formulaire
+//     }
+//   });
+// document
+//   .querySelector("#contact-form")
+//   .addEventListener("submit", function (e) {
+//     let nom = document.querySelector("#lastName");
+//     if (nom.value.length != 10) {
+//       // alert("Merci de renseigner votre nom");
+//       e.preventDefault; // pour empêcher la soumission du formulaire
+//     }
+//   });
+// document
+//   .querySelector("#contact-form")
+//   .addEventListener("submit", function (e) {
+//     var prenom = document.querySelector("#firstName");
+//     if (prenom.value.length != 10) {
+//       // alert("Merci de renseigner votre prénom");
+//       e.preventDefault; // pour empêcher la soumission du formulaire
+//     }
+//   });
+// document
+//   .querySelector("#contact-form")
+//   .addEventListener("submit", function (e) {
+//     var adresse = document.querySelector("#address");
+//     if (adresse.value.length != 10) {
+//       // alert(
+//       //   "Veuillez correctement renseigner le formulaire pour valider votre commande"
+//       // );
+//       e.preventDefault; // pour empêcher la soumission du formulaire
+//     }
+//   });
+// document
+//   .querySelector("#contact-form")
+//   .addEventListener("submit", function (e) {
+//     var ville = document.querySelector("#city");
+//     if (ville.value.length > 5) {
+//       alert("Merci de renseigner votre ville");
+//       e.preventDefault; // pour empêcher la soumission du formulaire
+//     }
+//   });
+// document
+//   .querySelector("#contact-form")
+//   .addEventListener("submit", function (e) {
+//     var mail = document.querySelector("#email");
+//     if (mail.value.length != 5) {
+//       // alert("Merci de renseigner une adresse mail");
+//       e.preventDefault; // pour empêcher la soumission du formulaire
+//     }
+//   });
