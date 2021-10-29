@@ -1,4 +1,4 @@
-// Lien avec le fichier class.js (permet d'afficher les éléments dans panier)
+// Lien avec le fichier panier.js  (permet d'afficher les éléments dans panier)
 let shoppingCart = new ShoppingCart();
 shoppingCart.getShoppingContent();
 // console.log("shoppingCart.content", shoppingCart.content);
