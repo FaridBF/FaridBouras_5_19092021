@@ -1,15 +1,12 @@
-//  ------------- Fonction asynchrone pour envoyer la commande  ------------- //
-async function postCommand(contactDetails) {
-  let shoppingCart = new ShoppingCart();
+//  ------------- Fonction asynchrone pour envoyer la commande à l'api  ------------- //
+async function postCommand(contact) {
+  let shoppingCart = new ShoppingCart(); // instance de la class shoppingcart
   shoppingCart.getShoppingContent();
-  // console.log(shoppingCart.content);
-  let products = []; // renvoyer un tableau vide par defaut
+  let products = []; // renvoyer un tableau vide par defaut (le nom 'products' est attendu par l'api)
   shoppingCart.content.forEach(function (product) {
     products.push(product._id); // l'API demande les ID des products
   });
-  // console.log("products: ", products);
-  let orderDetails = JSON.stringify({ contactDetails, products });
-  // console.log("orderDetails: ", orderDetails);
+  let orderDetails = JSON.stringify({ contact, products }); // converti en JSON
   let response = await fetch(urlAPI + "/order", {
     method: "POST",
     headers: {
@@ -37,8 +34,9 @@ function submitOrder() {
     let address = formContact.get("address");
     let email = formContact.get("email");
 
-    //  Création du contactDetails via les données brut afin de formater l'ensemble pour l'API (il faut respecter exactement ce que demande l'API)
-    let contactDetails = {
+    //  Création du contact via les données brut afin de formater l'ensemble pour l'API (il faut respecter exactement ce que demande l'API)
+    let contact = {
+      // clé: valeur
       firstName: firstName,
       lastName: lastName,
       city: city,
@@ -46,13 +44,13 @@ function submitOrder() {
       email: email,
     };
     // console.log(contactDetails);
-    postCommand(contactDetails).then(function (response) {
+    postCommand(contact).then(function (response) {
       console.log(response);
-      // window.location.href = "recap_commande.html"
       // .then() car fonction postCommand est asynchrone
       let shoppingCart = new ShoppingCart();
       // cela fait appel à la fonction reset afin de pouvoir reload le panier une fois la commande passée
       shoppingCart.reset();
+      window.location.href = "recap_commande.html";
     });
   });
 }

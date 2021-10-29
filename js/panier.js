@@ -218,7 +218,7 @@ class ShoppingCart {
     localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // permet de stocker dans le local storage les informations du tableau
     location.reload();
   }
-
+  //méthode qui a pour but d'ajouter les produits.
   add(oneProduct, quantite_selectionnee, lenses_selectionnee) {
     this.getShoppingContent();
     //récupération du contenu du panier avant qu'il ne puisse pouvoir rentrer dans la fonction
@@ -248,10 +248,10 @@ class ShoppingCart {
     }
     localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // transforme JSON en string
   }
-  // fonction reset: permet de vider le panier après utilisation du formulaire
+  // Méthode reset: permet de vider le panier après utilisation du formulaire
   reset() {
     this.content = [];
-    // localStorage.setItem(this.nameInStorage, JSON.stringify(this.content));
+    localStorage.setItem(this.nameInStorage, JSON.stringify(this.content));
   }
 
   // méthode pour insérer la template formulaire avec l'ensemble des champs demandés

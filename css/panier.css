@@ -77,15 +77,31 @@ h1 {
   align-items: center;
 }
 table {
-  width: 300px;
+  width: 1000px;
 }
 td {
   table-layout: fixed;
 }
 th,
 td {
-  border: 1px solid black;
-  padding: 5px;
+  /* border: 3px solid #965fe9; */
+  border: 3px solid grey;
+}
+
+/* .supprimer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+} */
+
+.quantite_panier,
+.prix_panier {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  /* height: 155px; */
 }
 
 .total_final1,
@@ -95,10 +111,6 @@ td {
 .total_final5,
 .total_final6 {
   border: 0px;
-}
-
-.produit_image_panier {
-  width: 100%;
 }
 
 img {
@@ -132,6 +144,13 @@ img {
   cursor: pointer;
   border: none;
   text-decoration: none;
+}
+
+.bouton_supprimer {
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 form {
