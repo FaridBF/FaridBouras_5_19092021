@@ -103,14 +103,6 @@ function createProduct(data) {
   });
 }
 
-// // gestion du bouton_valider_commander
-// let bouton_valider_commander = document.querySelector(
-//   "#bouton_valider_commander"
-// );
-// bouton_valider_commander.addEventListener("click", function () {
-//   let shoppingCart = new ShoppingCart();
-// });
-
 // ------------- Fin fonction pour afficher les données de l'API dans le DOM ------------- //
 
 // -------------  Fonction pour les calculs des sous-totaux ------------- //
@@ -163,11 +155,12 @@ function display_total_final() {
   shopping_total.appendChild(total_final);
   // stocker le résultat de la fonction get_result_total_final dans une variable
   let resultat_total = get_result_total_final(tableau_sous_totaux);
+  // let totalInStorage = "total_In_Storage";
+  localStorage.setItem("totalInStorage", resultat_total);
   // afficher le résultat dans le DOM avec la valeur de la variable
   total_final.innerHTML = "Total: " + resultat_total + " €";
 }
 // ------------- Fin fonction qui affiche le total final ------------- //
-
 // ------------- DEBUT CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
 class ShoppingCart {
   constructor() {

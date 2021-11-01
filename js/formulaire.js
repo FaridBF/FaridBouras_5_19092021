@@ -46,6 +46,10 @@ function submitOrder() {
     // console.log(contactDetails);
     postCommand(contact).then(function (response) {
       console.log(response);
+      // enregistremen des infos récupérées du serveur pour les mettre dans le localStorage
+      localStorage.setItem("contactAddress", response.contact.address);
+      localStorage.setItem("contactEmail", response.contact.email);
+      localStorage.setItem("orderId", response.orderId);
       // .then() car fonction postCommand est asynchrone
       let shoppingCart = new ShoppingCart();
       // cela fait appel à la fonction reset afin de pouvoir reload le panier une fois la commande passée
