@@ -161,6 +161,7 @@ function display_total_final() {
   total_final.innerHTML = "Total: " + resultat_total + " €";
 }
 // ------------- Fin fonction qui affiche le total final ------------- //
+
 // ------------- DEBUT CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
 class ShoppingCart {
   constructor() {
@@ -220,7 +221,10 @@ class ShoppingCart {
     // boucler sur chaque élément du panier
     this.content.forEach(function (oneElement) {
       // permet de faire le tour de l'ensemble des éléments dans notre panier
-      if (oneElement._id === oneProduct._id) {
+      if (
+        oneElement._id === oneProduct._id &&
+        oneElement.lenses === lenses_selectionnee
+      ) {
         // si sur chaque élement sur lequel on itère l'id de l'élément correspond à l'id du produit a ajouté
         alreadyExists = true; // condition permettant d'indiquer qu'elle a trouvé une quantité à incrémenter
         oneElement.quantity += quantite_selectionnee; // alors j'incrémente la quantité avec celle reçue depuis produit.html si la condition  précèdente est remplie
@@ -239,6 +243,7 @@ class ShoppingCart {
       };
       this.content.push(productToSave); //j'envoie l'ensemble des éléments sauvegarder dans mon panier en faisant le push du produit en question
     }
+    // mettre à jour le local storage
     localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // transforme JSON en string
   }
   // Méthode reset: permet de vider le panier après utilisation du formulaire
@@ -253,29 +258,28 @@ class ShoppingCart {
     const formulaire = document.querySelector("#contact-form"); // nouvelle variable = à l'ID du formulaire récupéré afin de générer le template formulaire
     formulaire.innerHTML = `
     <div class="style_champs">
-        <label for="lastName">Nom :</label>
-        <input type="text" id="lastName" name="lastName" minlength="2" maxlength="30" required>
+        <label for="lastName">Nom* :</label>
+        <input type="text" id="lastName" name="lastName" minlength="2" maxlength="30" required >
     </div>
     <div>
-        <label for="firstName">Prénom :</label>
+        <label for="firstName">Prénom* :</label>
         <input type="text" id="firstName" name="firstName" minlength="2" maxlength="30" required>
     </div>
     <div>
-        <label for="address">Adresse :</label>
+        <label for="address">Adresse* :</label>
         <input type="text" id="address" name="address" minlength="3" maxlength="150" required>
     </div>
     <div>
-        <label for="city">Ville :</label>
+        <label for="city">Ville* :</label>
         <input type="text" id="city" minlength="2" maxlength="50" name="city" required>
     </div>
     <div>
-        <label for="email">E-mail :</label>
+        <label for="email">E-mail* :</label>
         <input type="email" id="mail" name="email" minlength="3" maxlength="50" required>
     </div>
     <div class="bouton_conteneur">
     <button type="submit" class="bouton" id="submit_order">Commander</button>
-    </div>
-    </form>`;
+    </div>`;
   }
 }
 // ------------- FIN CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
