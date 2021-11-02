@@ -2,7 +2,7 @@
 // Récupération de la chaîne de requête dans l'URL
 const queryString = window.location.search;
 
-// // Méthode pour extraire l'ID - constructor URL searchParams
+// // Méthode pour extraire l'ID depuis l'URL - constructor URL searchParams
 let SearchParams = new URLSearchParams(queryString);
 let product_id = SearchParams.get("id");
 
@@ -149,12 +149,7 @@ function displayProduct(data) {
   bouton_commander.innerText = "Ajouter au panier";
   link.appendChild(bouton_commander);
 
-  // // création du link vers recap_commande.html
-  // let link_recap_commande = document.createElement("a");
-  // link_recap_commande.href = "recap_commande.html";
-  // bouton_commander.appendChild(link_recap_commande);
-
-  // Création d'un évènment click sur bouton_commander pour ajout produit
+  // Création d'un évènement click sur bouton_commander pour ajout produit
   bouton_commander.addEventListener("click", function () {
     let shoppingCart = new ShoppingCart();
     // ajouter un produit au panier avec data (objet produit) et quantite
