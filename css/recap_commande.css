@@ -52,7 +52,7 @@ nav {
 .accueil {
   background-color: #965fe9;
   color: white;
-  height: 60px;
+  height: 90px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,50 +74,13 @@ h1 {
   align-items: center;
 }
 
-.details_commande {
-  display: flex;
-}
-
-/*Section 2 - Produits*/
-
-.total_produits {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-  margin-top: 20px;
-}
-
-.tableau {
+#details_commande {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-table {
-  width: 300px;
-}
-td {
-  table-layout: fixed;
-}
-th,
-td {
-  border: 1px solid black;
-  padding: 5px;
-}
-
-.produit_image_panier {
-  width: 100%;
-}
-
-img {
-  height: 150px;
-}
-
-h2 {
-  display: flex;
+  min-height: 325px;
   justify-content: center;
-  font-size: 35px;
+  font-size: 22px;
 }
 
 /*Footer*/
@@ -167,16 +130,9 @@ footer a {
 
 @media screen and (min-width: 758px) and (max-width: 1520px) {
   /*Ici, le CSS s'appliquera aux écrans de 758px minimum à 1520px maximum */
-  .total_produits {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  h2 {
-    font-size: 30px;
-    display: flex;
-    justify-content: center;
+  #details_commande {
+    min-height: 320px;
+    font-size: 22px;
   }
 
   footer a {
@@ -200,29 +156,38 @@ footer a {
     justify-content: center;
   }
 
-  .accueil {
-    margin-bottom: 0;
+  #details_commande {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 325px;
+    justify-content: center;
+    font-size: 18px;
   }
 
-  .total_produits {
+  .texte_details_commande {
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
-    margin-top: 0;
+    flex-wrap: nowrap;
   }
-  h2 {
-    font-size: 17px;
-    display: flex;
-    justify-content: center;
+
+  .accueil {
+    margin-bottom: 0;
   }
 
   footer {
     overflow-x: hidden;
+    height: 300px;
   }
 
   .footer-content {
     margin-bottom: 15px;
+  }
+
+  h2 {
+    font-size: 15px;
   }
 
   .container {
