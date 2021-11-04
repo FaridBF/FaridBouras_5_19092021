@@ -267,7 +267,7 @@ class ShoppingCart {
     </div>
     <div>
         <label for="address">Adresse* :</label>
-        <input type="text" id="address" name="address" minlength="3" maxlength="150" required>
+        <input type="text" id="address" name="address" minlength="5" maxlength="150" required>
     </div>
     <div>
         <label for="city">Ville* :</label>
@@ -275,7 +275,7 @@ class ShoppingCart {
     </div>
     <div>
         <label for="email">E-mail* :</label>
-        <input type="email" id="mail" name="email" minlength="3" maxlength="50" required>
+        <input type="email" id="email" name="email" minlength="5" maxlength="150" required>
     </div>
     <div class="bouton_conteneur">
     <button type="submit" class="bouton" id="submit_order">Commander</button>

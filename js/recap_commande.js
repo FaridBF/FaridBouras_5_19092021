@@ -17,7 +17,7 @@ function display_recap_commande() {
   <p class="texte_details_commande">
   ${contactAddress}</b> à <b> ${contactCity}</b></p>
   </p>`;
-  // vider les éléments du localStorage
+  // vider les éléments du localStorage (à gauche c'est la clé à droite la valeur)
   localStorage.setItem("orderId", "");
   localStorage.setItem("contactAddress", "");
   localStorage.setItem("contactEmail", "");
