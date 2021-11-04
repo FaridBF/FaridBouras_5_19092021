@@ -6,11 +6,12 @@ async function postCommand(contact) {
   shoppingCart.content.forEach(function (product) {
     products.push(product._id); // l'API demande les ID des products
   });
-  let orderDetails = JSON.stringify({ contact, products }); // converti en JSON
+  let orderDetails = JSON.stringify({ contact, products }); // converti en JSON (objet contact + liste products ID)
   let response = await fetch(urlAPI + "/order", {
-    method: "POST",
+    // attendre (await) le retour du back avant d'appeler l'URL de l'API
+    method: "POST", // on chercher à envoyer les valeurs
     headers: {
-      "content-Type": "application/json",
+      "content-Type": "application/json", //il faut que la requête soit du JSON (l'API)
     },
     body: orderDetails,
   });
@@ -26,94 +27,65 @@ function submitOrder() {
     e.preventDefault();
     // on récupère l'ensemble des données de manière brut ce qui correspond à notre contactobject en données brut
     let form = document.getElementById("contact-form"); // nom de notre formulaire dans la partie HTML (récupération via ID)
-    let formContact = new FormData(form); // Form Data est une classe JS permettant de transformer le formulaire dans une forme utilisable facilement
+    let formContact = new FormData(form); // Form Data est un constructeur JS permettant de transformer le formulaire dans une forme utilisable facilement
 
-    let firstName = formContact.get("firstName"); // On récupère via les champs "name" dans le formulaire afin de récupérer la valeur dans le bonne forme (Formdata)
+    let firstName = formContact.get("firstName"); // On récupère via les champs "name" dans le formulaire afin de récupérer la valeur dans la bonne forme (Formdata)
     let lastName = formContact.get("lastName");
     let city = formContact.get("city");
     let address = formContact.get("address");
     let email = formContact.get("email");
+    arobase = email.indexOf("@");
+    point = email.lastIndexOf(".");
 
-    //  Création du contact via les données brut afin de formater l'ensemble pour l'API (il faut respecter exactement ce que demande l'API)
-    let contact = {
-      // clé: valeur
-      firstName: firstName,
-      lastName: lastName,
-      city: city,
-      address: address,
-      email: email,
-    };
-    // console.log(contactDetails);
-    postCommand(contact).then(function (response) {
-      console.log(response);
-      // enregistremen des infos récupérées du serveur pour les mettre dans le localStorage
-      localStorage.setItem("contactAddress", response.contact.address);
-      localStorage.setItem("contactEmail", response.contact.email);
-      localStorage.setItem("orderId", response.orderId);
+    let isFormValid = validateForm();
+
+    if (isFormValid === true) {
+      //  Création du contact via les données brut afin de formater l'ensemble pour l'API (il faut respecter exactement ce que demande l'API)
+      let contact = {
+        // clé: valeur
+        firstName: firstName,
+        lastName: lastName,
+        city: city,
+        address: address,
+        email: email,
+      };
       // .then() car fonction postCommand est asynchrone
-      let shoppingCart = new ShoppingCart();
-      // cela fait appel à la fonction reset afin de pouvoir reload le panier une fois la commande passée
-      shoppingCart.reset();
-      window.location.href = "recap_commande.html";
-    });
+      postCommand(contact).then(function (response) {
+        // enregistrement des infos récupérées du serveur pour les mettre dans le localStorage
+        localStorage.setItem("contactAddress", response.contact.address);
+        localStorage.setItem("contactEmail", response.contact.email);
+        localStorage.setItem("contactCity", response.contact.city);
+        localStorage.setItem("orderId", response.orderId);
+        let shoppingCart = new ShoppingCart();
+        // cela fait appel à la fonction reset afin de pouvoir reload le panier une fois la commande passée
+        shoppingCart.reset();
+        window.location.href = "recap_commande.html";
+      });
+    }
   });
 }
-// console.log(contactDetails);
-// Récupération des ID, mise en place des écouteurs d'évènements pour les règles de gestion
-
-// document
-//   .querySelector("#contact-form")
-//   .addEventListener("change", function (e) {
-//     let nom = document.querySelector("#lastName");
-//     if (!nom.value) {
-//       // alert("Merci de renseigner votre nom");
-//       e.preventDefault; // pour empêcher la soumission du formulaire
-//     }
-//   });
-// document
-//   .querySelector("#contact-form")
-//   .addEventListener("submit", function (e) {
-//     let nom = document.querySelector("#lastName");
-//     if (nom.value.length != 10) {
-//       // alert("Merci de renseigner votre nom");
-//       e.preventDefault; // pour empêcher la soumission du formulaire
-//     }
-//   });
-// document
-//   .querySelector("#contact-form")
-//   .addEventListener("submit", function (e) {
-//     var prenom = document.querySelector("#firstName");
-//     if (prenom.value.length != 10) {
-//       // alert("Merci de renseigner votre prénom");
-//       e.preventDefault; // pour empêcher la soumission du formulaire
-//     }
-//   });
-// document
-//   .querySelector("#contact-form")
-//   .addEventListener("submit", function (e) {
-//     var adresse = document.querySelector("#address");
-//     if (adresse.value.length != 10) {
-//       // alert(
-//       //   "Veuillez correctement renseigner le formulaire pour valider votre commande"
-//       // );
-//       e.preventDefault; // pour empêcher la soumission du formulaire
-//     }
-//   });
-// document
-//   .querySelector("#contact-form")
-//   .addEventListener("submit", function (e) {
-//     var ville = document.querySelector("#city");
-//     if (ville.value.length > 5) {
-//       alert("Merci de renseigner votre ville");
-//       e.preventDefault; // pour empêcher la soumission du formulaire
-//     }
-//   });
-// document
-//   .querySelector("#contact-form")
-//   .addEventListener("submit", function (e) {
-//     var mail = document.querySelector("#email");
-//     if (mail.value.length != 5) {
-//       // alert("Merci de renseigner une adresse mail");
-//       e.preventDefault; // pour empêcher la soumission du formulaire
-//     }
-//   });
+// fonction de vérification du formulaire
+function validateForm() {
+  if (lastName.value.length < 2) {
+    alert("Veuillez renseigner le champs nom");
+    return false;
+  }
+  if (firstName.value.length < 2) {
+    alert("Veuillez renseigner le champs prénom");
+    return false;
+  }
+  if (city.value.length < 2) {
+    alert("Veuillez renseigner le champs ville");
+    return false;
+  }
+  if (address.value.length < 5) {
+    alert("Veuillez renseigner le champs adresse");
+    return false;
+  }
+  if (email.value.length < 5 || arobase < 1 || point - arobase < 2) {
+    alert("Veuillez renseigner le champs email (exemple: orinoco@gmail.com)");
+    return false;
+  } else {
+    return true;
+  }
+}
