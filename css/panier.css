@@ -1,6 +1,6 @@
 /*Page panier*/
 body {
-  min-width: 350px;
+  min-width: 490px;
   max-width: 1900px;
   height: auto;
   padding: auto;
@@ -71,37 +71,55 @@ h1 {
   font-size: 30px;
 }
 /*Section 2 - Produits - les boutons*/
+.shopping_details {
+  background-color: #f3e9f1;
+}
+
 .tableau {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 135px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
+
+.tableau_contenu {
+  background-color: #f3e9f1;
+}
+
 table {
-  width: 1000px;
+  width: 50%;
 }
 td {
   table-layout: fixed;
 }
 th,
 td {
-  /* border: 3px solid #965fe9; */
   border: 3px solid grey;
 }
 
-/* .supprimer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-} */
-
-.quantite_panier,
+.produit_image_panier {
+  width: 15%;
+}
+.reference_panier {
+  width: 4%;
+}
+.select_reference {
+  width: 3%;
+}
+.quantite_panier {
+  width: 0%;
+  margin-left: 28px;
+}
+.supprimer {
+  width: 0%;
+}
 .prix_panier {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  /* height: 155px; */
+  width: 2%;
+}
+.prix_soustotal_panier {
+  width: 1%;
 }
 
 .total_final1,
@@ -113,8 +131,15 @@ td {
   border: 0px;
 }
 
+.total_final {
+  background-color: #f3e9f1;
+}
+
 img {
-  height: 150px;
+  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
 /*Section 2 - Produits - les boutons*/
@@ -243,9 +268,19 @@ footer a {
     width: 75%;
     height: 300px;
   }
+
+  img {
+    height: 85px;
+    object-fit: cover;
+  }
   .texte_produit {
     width: 50%;
   }
+
+  .tableau {
+    min-height: 735px;
+  }
+
   h2 {
     font-size: 30px;
     display: flex;
@@ -262,6 +297,12 @@ footer a {
     display: flex;
     height: 90px;
   }
+
+  img {
+    height: 85px;
+    object-fit: cover;
+  }
+
   .navigation {
     margin-right: 10px;
   }
@@ -289,6 +330,10 @@ footer a {
     width: 90%;
     height: 240px;
     margin: 15px;
+  }
+
+  .quantite_panier {
+    margin-left: 25px;
   }
   .image_produit {
     width: 60%;
