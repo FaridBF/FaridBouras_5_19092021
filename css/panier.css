@@ -7,6 +7,14 @@ body {
   font-family: "Raleway", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #c94575;
+}
+
 /*Header*/
 
 nav {
@@ -247,7 +255,7 @@ h3 {
 }
 
 .footer_social a:hover {
-  color: black;
+  color: #c94575;
 }
 
 footer a {
