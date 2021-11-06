@@ -2,7 +2,6 @@ body {
   min-width: 350px;
   max-width: 1900px;
   height: auto;
-  padding: auto;
   margin: auto;
   font-family: "Raleway", sans-serif;
 }
@@ -89,7 +88,6 @@ h1 {
   border-color: white;
   box-shadow: 0 0 16px #0000002e;
   border-radius: 16px;
-  background: white;
   margin: 0px 0px 60px 30px;
   overflow: hidden;
   flex-direction: row;
