@@ -1,4 +1,4 @@
-//  ------------- Fonction asynchrone pour envoyer la commande à l'api  ------------- //
+//------- Fonction asynchrone pour envoyer la commande à l'api----- //
 async function postCommand(contact) {
   let shoppingCart = new ShoppingCart(); // instance de la class shoppingcart
   shoppingCart.getShoppingContent();
@@ -34,8 +34,6 @@ function submitOrder() {
     let city = formContact.get("city");
     let address = formContact.get("address");
     let email = formContact.get("email");
-    arobase = email.indexOf("@");
-    point = email.lastIndexOf(".");
 
     let isFormValid = validateForm();
 
@@ -82,8 +80,12 @@ function validateForm() {
     alert("Veuillez renseigner le champs adresse");
     return false;
   }
-  if (email.value.length < 5 || arobase < 1 || point - arobase < 2) {
-    alert("Veuillez renseigner le champs email (exemple: orinoco@gmail.com)");
+  if (
+    !email.value.includes("@") ||
+    !email.value.includes(".") ||
+    email.value.length < 5
+  ) {
+    alert("Veuillez respecter le format email (exemple: orinoco@gmail.com)");
     return false;
   } else {
     return true;
