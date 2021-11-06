@@ -1,4 +1,4 @@
-// ------------- RECUPERATION ID PRODUIT DEPUIS URL ------------- //
+// --- RECUPERATION ID PRODUIT DEPUIS URL --- //
 // Récupération de la chaîne de requête dans l'URL
 const queryString = window.location.search;
 
@@ -6,14 +6,13 @@ const queryString = window.location.search;
 let SearchParams = new URLSearchParams(queryString);
 let product_id = SearchParams.get("id");
 
-// ------------- FIN RECUPERATION ID PRODUIT DEPUIS URL ------------- //
+// --- FIN RECUPERATION ID PRODUIT DEPUIS URL --- //
 
 // Déclaration de l'URL de l'api
 const urlApiProduct = "http://localhost:3000/api/cameras/";
 
-//  -------------  Fonction pour afficher les données de l'API dans le DOM  -------------  //
+//  ---  Fonction pour afficher les données de l'API dans le DOM  ---  //
 function displayProduct(data) {
-  console.log("data", data);
 
   // récupérer div .conteneur_produit
   let conteneur_produit = document.querySelector(".conteneur_produit");
@@ -29,9 +28,12 @@ function displayProduct(data) {
 
   // Création d'une balise img pour l'image
   let image = document.createElement("img");
-  image.src = data.imageUrl; // ajout de l'attribut src avec la valeur récupérée de l'API
-  image.alt = data.name; // ajout du nom du produit dans alt
-  image_produit.appendChild(image); // ajout de la balise en tant qu'enfant dans la div parent
+  // ajout de l'attribut src avec la valeur récupérée de l'API
+  image.src = data.imageUrl;
+  // ajout du nom du produit dans alt
+  image.alt = data.name;
+  // ajout de la balise en tant qu'enfant dans la div parent
+  image_produit.appendChild(image);
 
   //créer div .texte_produit
   let texte_produit = document.createElement("div");
@@ -61,7 +63,7 @@ function displayProduct(data) {
     selection_option = document.createElement("option");
     // assigner à cette balise la valeur de l'élément
     selection_option.innerHTML = element;
-    // ajouter à la balise option un attribut value et lui assigner aussi la valeur de l'élément
+    // ajouter à la balise option un attribut value avec valeur de l'élément
     selection_option.value = element;
     // ajouter cette balise en tant qu'enfant de la balise select
     selection.appendChild(selection_option);
@@ -100,7 +102,7 @@ function displayProduct(data) {
     quantite_option = document.createElement("option");
     // assigner à cette balise la valeur de l'élément
     quantite_option.innerHTML = element;
-    // ajouter à la balise option un attribut value et lui assigner aussi la valeur de l'élément
+    // ajouter à la balise option un attribut value avec la valeur de l'élément
     quantite_option.value = element;
     // ajouter cette balise en tant qu'enfant de la balise quantite
     quantite.appendChild(quantite_option);
@@ -128,19 +130,16 @@ function displayProduct(data) {
 
   // récupérer l'option séléctionnée du produit
   selection.addEventListener("change", function () {
-    // dans les options du select, récupérer la valeur (value) de l'index sélectionné (quantite.selectedIndex)
-    selection.value = selection.options[selection.selectedIndex].value; // selectedIndex et value sont des variables natives à JS
+    // dans les options du select, récupérer la valeur (value)
+    // de l'index sélectionné (quantite.selectedIndex)
+    // selectedIndex et value sont des variables natives à JS
+    selection.value = selection.options[selection.selectedIndex].value;
   });
 
   // let quantite_selectionnee = 1;
   // récupérer la quantité sélectionnée
   quantite.addEventListener("change", function () {
-    // dans les options du select, récupérer la valeur (value) de l'index sélectionné (quantite.selectedIndex)
-    // et l'affecter à la balise <select> donc à quantite.value
-    quantite.value = quantite.options[quantite.selectedIndex].value; // selectedIndex et value sont des variables natives à JS
-    // const quantite_selectionnee = quantite.options[quantite.selectedIndex].value;
-    // console.log(quantite_selectionnee);
-    // return quantite_selectionnee;
+    quantite.value = quantite.options[quantite.selectedIndex].value;
   });
 
   // création du button comme enfant de parent link
@@ -157,7 +156,7 @@ function displayProduct(data) {
   });
 }
 
-//  -------------  Fonction pour afficher le produit de l'id demandé  -------------  //
+//  ---  Fonction pour afficher le produit de l'id demandé  ---  //
 function getProduct(product_id) {
   fetch(urlApiProduct + product_id)
     .then(function (res) {
@@ -170,12 +169,12 @@ function getProduct(product_id) {
       displayProduct(data);
     })
     .catch(function (err) {
-      console.log("Une erreur est survenue : ", err);
       alert("Une erreur est survenue lors du chargement des données.");
     });
 }
 
 //-------------------------------------------------------------- //
 
-// Appel à la fonction pour récupérer les données du produit demandé depuis l'API
+// Appel à la fonction pour récupérer
+// les données du produit demandé depuis l'API
 getProduct(product_id);

@@ -1,11 +1,12 @@
 // Déclaration de l'URL de l'api
 const urlAPI = "http://localhost:3000/api/cameras";
 
-// créer un tableau vide de sous totaux pour le remplir au fur et à mesure de l'ajout des produits
+// créer un tableau vide de sous totaux pour le remplir au fur
+// et à mesure de l'ajout des produits
 let tableau_sous_totaux = [];
 // console.log(tableau_sous_totaux);
 
-// ------------- Fonction pour afficher les données de l'API dans le DOM ------------- //
+// --- Fonction pour afficher les données de l'API dans le DOM --- //
 function createProduct(data) {
   // crée un tableau vide de sous-totaux pour y ajouter chaque sous-totaux
   // récupérer div tableau_contenu
@@ -66,7 +67,6 @@ function createProduct(data) {
   bouton_supprimer.innerHTML = "Supprimer";
   // Création d'un évènment click sur bouton_supprimer pour supprimer produit
   bouton_supprimer.addEventListener("click", function () {
-    console.log(data);
     let shoppingCart = new ShoppingCart();
     shoppingCart.remove(data);
   });
@@ -81,19 +81,21 @@ function createProduct(data) {
   let prix_soustotal_panier = document.createElement("td");
   prix_soustotal_panier.classList.add("prix_soustotal_panier");
   shopping_details.appendChild(prix_soustotal_panier);
+  // multiplication afin d'obtenir le montant du sous total de l'élément
   let resultat_sous_total = data.quantity * (data.price / 100).toFixed(2);
-  prix_soustotal_panier.innerHTML = resultat_sous_total + " €"; // multiplication data.quantity par data price afin d'obtenir le montant du sous total de l'élément correspondant
+  prix_soustotal_panier.innerHTML = resultat_sous_total + " €";
   // remplir le tableau_sous_totaux par chaque sous-total créé
   tableau_sous_totaux.push(resultat_sous_total);
 
-  // // récupération du bouton_vider dans le html pour vider totalement le tableau
+  // récupération du bouton_vider dans le html pour vider totalement le tableau
   let bouton_vider = document.querySelector("#bouton_vider");
   bouton_vider.addEventListener("click", function () {
     let shoppingCart = new ShoppingCart();
     shoppingCart.emptyShoppingContent();
   });
 
-  // récupération du bouton_valider dans le html pour valider mon panier dans le but de faire afficher le formulaire
+  // récupération du bouton_valider dans le html pour valider mon panier
+  // dans le but de faire afficher le formulaire
   let bouton_valider = document.querySelector("#bouton_valider");
   bouton_valider.addEventListener("click", function () {
     let shoppingCart = new ShoppingCart();
@@ -103,18 +105,19 @@ function createProduct(data) {
   });
 }
 
-// ------------- Fin fonction pour afficher les données de l'API dans le DOM ------------- //
+// --- Fin fonction pour afficher les données de l'API dans le DOM --- //
 
 // -------------  Fonction pour les calculs des sous-totaux ------------- //
 // // calcul du total
 function get_result_total_final(tableau_sous_totaux) {
   // faire la somme des éléments du tableau en les accumulant
+  // La méthode reduce() applique une fonction qui est un « accumulateur »
+  // et qui traite chaque valeur d'une liste
   // curr: élément courant
   const resultat_total_final = tableau_sous_totaux.reduce(
     (acc, curr) => acc + curr
     // valeur précédente + valeur actuelle
   );
-  //La méthode reduce() applique une fonction qui est un « accumulateur » et qui traite chaque valeur d'une liste
   return resultat_total_final;
 }
 // ------------- Fin fonction pour les calculs des sous-totaux ------------- //
@@ -129,7 +132,8 @@ function display_total_final() {
   shopping_total.classList.add("shopping_total");
   tableau_total.appendChild(shopping_total);
 
-  // l'ensemble des th du tfoot afin d'avoir le total des sous-totaux au bon endroit
+  // l'ensemble des th du tfoot afin d'avoir
+  // le total des sous-totaux au bon endroit
   let total_final1 = document.createElement("th");
   total_final1.classList.add("total_final1");
   shopping_total.appendChild(total_final1);
@@ -160,22 +164,26 @@ function display_total_final() {
   // afficher le résultat dans le DOM avec la valeur de la variable
   total_final.innerHTML = "Total: " + resultat_total + " €";
 }
-// ------------- Fin fonction qui affiche le total final ------------- //
+// --- Fin fonction qui affiche le total final --- //
 
-// ------------- DEBUT CLASSE GERANT PANIER DANS LOCALSTORAGE ------------- //
+// --- DEBUT CLASSE GERANT PANIER DANS LOCALSTORAGE --- //
 class ShoppingCart {
   constructor() {
-    this.nameInStorage = "shopping-cart"; // la clé afin de faire le lien avec mon local storage
-    this.content = []; // il s'agit de ma liste (tableau) -  c'est le contenu de mon panier
+    // la clé afin de faire le lien avec mon local storage
+    this.nameInStorage = "shopping-cart";
+    // il s'agit de ma liste (tableau) -  c'est le contenu de mon panier
+    this.content = [];
   }
 
-  // méthode qui récupère le contenu de localStorage et l'affecte à this.content (attribut)
+  // méthode qui récupère le contenu de localStorage et
+  // l'affecte à this.content (attribut)
   getShoppingContent() {
     this.content = localStorage.getItem(this.nameInStorage);
     if (this.content === null) {
       this.content = [];
     } else {
-      this.content = JSON.parse(this.content); // transform le json récupéré en objet JS
+      // transform le json récupéré en objet JS
+      this.content = JSON.parse(this.content);
     }
   }
 
@@ -183,68 +191,77 @@ class ShoppingCart {
   emptyShoppingContent() {
     this.getShoppingContent(); // récupère contenu
     this.content.splice(0, this.content.length); // vide
-    localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // permet de stocker dans le local storage les informations du tableau
+    // permet de stocker dans le local storage les informations du tableau
+    localStorage.setItem(this.nameInStorage, JSON.stringify(this.content));
     location.reload();
   }
 
   // méthode qui supprime un élément un à un
   remove(oneProduct) {
-    this.getShoppingContent(); //récupération du contenu du panier avant qu'il ne puisse pouvoir rentrer dans la fonction
-    let indexToRemove = null; // création d'une variable par defaut en null
-    // index est le numéro de placement de l'item et one item contient toutes les infos
+    this.getShoppingContent();
+    // création d'une variable par defaut en null
+    let indexToRemove = null;
+    // index est le numéro de placement de l'item
+    // et one item contient toutes les infos
     this.content.forEach(function (oneItem, index) {
-      // boucler sur l'ensemble de notre shoppint cart pour récupérer l'index de l'objet pour lequel quantité -= 1
+      // boucler sur l'ensemble du panier pour récupérer l'index de l'objet
+      // pour lequel quantité -= 1
       if (oneProduct._id === oneItem._id) {
-        indexToRemove = index; // de là si il trouve, il définit notre variable et ça peu importe le chiffre 0, 1, 2....
+        // de là s'il trouve, il définit notre variable
+        // et ça peu importe le chiffre 0, 1, 2....
+        indexToRemove = index;
       }
     });
     // si indexToremove n'est pas rester à null
     if (indexToRemove !== null) {
       // si on trouve l'élément dans notre panier le produit qui correspond
-      this.content[indexToRemove].quantity -= 1; // index du produit à supprimer dans le tableau
+      // index du produit à supprimer dans le tableau
+      this.content[indexToRemove].quantity -= 1;
       if (this.content[indexToRemove].quantity === 0) {
         // si la quantité de l'élément ayant indextoremove = 0
-        this.content.splice(indexToRemove, 1); // l'élément que l'on souhaite enlever il est à la place indexToRemove
-        // splice : pour enlever un élément / 1 n'est pas la notion de quantité, va enlever la ligne concernée dans le tableau
+        // l'élément que l'on souhaite enlever il est à la place indexToRemove
+        this.content.splice(indexToRemove, 1);
+        // splice : pour enlever un élément / 1 n'est pas la notion de quantité
+        // va enlever la ligne concernée dans le tableau
       }
     }
-    // une fois que c'est fait, on va demander à faire un save à la condition qu'il est fait une modifs sinon ça sert à rien
-    localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // permet de stocker dans le local storage les informations du tableau
+    // permet de stocker dans le local storage les informations du tableau
+    localStorage.setItem(this.nameInStorage, JSON.stringify(this.content));
     location.reload();
   }
   //méthode qui a pour but d'ajouter les produits.
   add(oneProduct, quantite_selectionnee, lenses_selectionnee) {
     this.getShoppingContent();
-    //récupération du contenu du panier avant qu'il ne puisse pouvoir rentrer dans la fonction
     // j'ajoute un produit
     let alreadyExists = false;
     // boucler sur chaque élément du panier
     this.content.forEach(function (oneElement) {
-      // permet de faire le tour de l'ensemble des éléments dans notre panier
+      // si sur chq élement sur lequel on itère l'id de l'élément
+      // correspond à l'id du produit à ajouter
       if (
         oneElement._id === oneProduct._id &&
         oneElement.lenses === lenses_selectionnee
       ) {
-        // si sur chaque élement sur lequel on itère l'id de l'élément correspond à l'id du produit a ajouté
-        alreadyExists = true; // condition permettant d'indiquer qu'elle a trouvé une quantité à incrémenter
-        oneElement.quantity += quantite_selectionnee; // alors j'incrémente la quantité avec celle reçue depuis produit.html si la condition  précèdente est remplie
+        alreadyExists = true;
+        // alors j'incrémente la qté avec celle reçue de produit.html
+        oneElement.quantity += quantite_selectionnee;
       }
     });
     if (alreadyExists === false) {
-      // s'il n'est pas dans ma condition de ma quantité, elle n'a donc pas trouvé la valeur, de quantité à incrémenter, donc ajout
       let productToSave = {
         // Variable qui contient tous les éléments que je souhaite sauvegarder
         _id: oneProduct._id,
-        name: oneProduct.name,
         imageUrl: oneProduct.imageUrl,
         lenses: lenses_selectionnee,
-        quantity: quantite_selectionnee,
+        name: oneProduct.name,
         price: oneProduct.price,
+        quantity: quantite_selectionnee
       };
-      this.content.push(productToSave); //j'envoie l'ensemble des éléments sauvegarder dans mon panier en faisant le push du produit en question
+      // j'envoie l'élément à sauvegarder dans mon panier
+      this.content.push(productToSave);
     }
-    // mettre à jour le local storage
-    localStorage.setItem(this.nameInStorage, JSON.stringify(this.content)); // transforme JSON en string
+    // mettre à jour le local storage ac content en JSON
+    localStorage.setItem(this.nameInStorage, JSON.stringify(this.content));
   }
   // Méthode reset: permet de vider le panier après utilisation du formulaire
   reset() {
@@ -252,30 +269,65 @@ class ShoppingCart {
     localStorage.setItem(this.nameInStorage, JSON.stringify(this.content));
   }
 
-  // méthode pour insérer la template formulaire avec l'ensemble des champs demandés
+  // insérer la template formulaire avec l'ensemble des champs demandés
   formButtonValidate() {
     this.getShoppingContent(); // récupère le contenu
-    const formulaire = document.querySelector("#contact-form"); // nouvelle variable = à l'ID du formulaire récupéré afin de générer le template formulaire
+    const formulaire = document.querySelector("#contact-form");
     formulaire.innerHTML = `
     <div class="style_champs">
         <label for="lastName">Nom* :</label>
-        <input type="text" id="lastName" name="lastName" minlength="2" maxlength="30" required >
+        <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            minlength="2"
+            maxlength="30"
+            required
+        >
     </div>
     <div>
         <label for="firstName">Prénom* :</label>
-        <input type="text" id="firstName" name="firstName" minlength="2" maxlength="30" required>
+        <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            minlength="2"
+            maxlength="30"
+            required
+       >
     </div>
     <div>
         <label for="address">Adresse* :</label>
-        <input type="text" id="address" name="address" minlength="5" maxlength="150" required>
+        <input
+            type="text"
+            id="address"
+            name="address"
+            minlength="5"
+            maxlength="150"
+            required
+       >
     </div>
     <div>
         <label for="city">Ville* :</label>
-        <input type="text" id="city" minlength="2" maxlength="50" name="city" required>
+        <input
+            type="text"
+            id="city"
+            minlength="2"
+            maxlength="50"
+            name="city"
+            required
+       >
     </div>
     <div>
         <label for="email">E-mail* :</label>
-        <input type="email" id="email" name="email" minlength="5" maxlength="150" required>
+        <input
+            type="email"
+            id="email"
+            name="email"
+            minlength="5"
+            maxlength="150"
+            required
+       >
     </div>
     <div class="bouton_conteneur">
     <button type="submit" class="bouton" id="submit_order">Commander</button>

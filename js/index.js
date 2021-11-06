@@ -17,9 +17,12 @@ function createProduct(data) {
 
   // Création d'une balise img pour l'image
   let image = document.createElement("img");
-  image.src = data.imageUrl; // ajout de l'attribut src avec la valeur récupérée de l'API
-  image.alt = data.name; // ajout du nom du produit dans alt
-  image_produit.appendChild(image); // ajout de la balise en tant qu'enfant dans la div parent
+  // ajout de l'attribut src avec la valeur récupérée de l'API
+  image.src = data.imageUrl;
+  // ajout du nom du produit dans alt
+  image.alt = data.name;
+  // ajout de la balise en tant qu'enfant dans la div parent
+  image_produit.appendChild(image);
 
   //créer div .texte_produit
   let texte_produit = document.createElement("div");
@@ -81,13 +84,14 @@ function getProducts() {
     })
     // Récupérer la valeur de la réponse du JSON
     .then(function (data) {
-      // Pour chaque élément du tableau de données, créer un produit à afficher en HTML
-      // Boucler sur le tableau reçu de l'API et pour chaque element du tableau lancer la fonction createProduct
+      // Pour chaque élément du tableau de données,
+      // créer un produit à afficher en HTML
+      // Boucler sur le tableau reçu de l'API et
+      // pour chaque element du tableau lancer la fonction createProduct
       // avec en paramètre chaque element du tableau
       data.forEach((element) => createProduct(element));
     })
     .catch(function (err) {
-      console.log("Une erreur est survenue : ", err);
       alert("Une erreur est survenue lors du chargement des données.");
     });
 }

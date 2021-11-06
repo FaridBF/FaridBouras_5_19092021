@@ -1,7 +1,7 @@
 function display_recap_commande() {
   // récupération montant total de la commande
   let resultat_total = localStorage.getItem("totalInStorage");
-  // récupération infos du serveur (order_id, email, city et address du contact)
+  // récup infos du serveur (order_id, email, city et address du contact)
   let orderId = localStorage.getItem("orderId");
   let contactAddress = localStorage.getItem("contactAddress");
   let contactEmail = localStorage.getItem("contactEmail");
@@ -9,15 +9,22 @@ function display_recap_commande() {
 
   const recap_commande = document.querySelector("#details_commande");
   recap_commande.innerHTML = `
-  <p class="texte_details_commande">Merci , votre commande n° <b>${orderId}</b>
-      est validée ! </p>
-  <p class="texte_details_commande">Votre facture pour un montant total de <b>${resultat_total} euros</b>  va vous
-      être transmise par mail à : <b>${contactEmail}</b></p>
-  <p class="texte_details_commande">On vous préviendra quand elle partira chez vous à l'adresse suivante :<b>
+  <p class="texte_details_commande">Merci, votre commande n° <b>${orderId}</b>
+      est validée !
+  </p>
   <p class="texte_details_commande">
-  ${contactAddress}</b> à <b> ${contactCity}</b></p>
+      Votre facture pour un montant total de
+      <b>${resultat_total} euros</b> vous
+      sera transmise par mail à : <b>${contactEmail}</b>
+  </p>
+  <p class="texte_details_commande">
+      Nous vous préviendrons lorsque votre commande sera
+      expédiée à l'adresse suivante :
+  </p>
+  <p class="texte_details_commande">
+      <b>${contactAddress}</b> à <b>${contactCity}</b>
   </p>`;
-  // vider les éléments du localStorage (à gauche c'est la clé à droite la valeur)
+  // vider les éléments du localStorage (clé valeur)
   localStorage.setItem("orderId", "");
   localStorage.setItem("contactAddress", "");
   localStorage.setItem("contactEmail", "");
