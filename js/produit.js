@@ -3,8 +3,8 @@
 const queryString = window.location.search;
 
 // // Méthode pour extraire l'ID depuis l'URL - constructor URL searchParams
-let SearchParams = new URLSearchParams(queryString);
-let product_id = SearchParams.get("id");
+let searchParams = new URLSearchParams(queryString);
+let product_id = searchParams.get("id");
 
 // --- FIN RECUPERATION ID PRODUIT DEPUIS URL --- //
 
@@ -13,7 +13,6 @@ const urlApiProduct = "http://localhost:3000/api/cameras/";
 
 //  ---  Fonction pour afficher les données de l'API dans le DOM  ---  //
 function displayProduct(data) {
-
   // récupérer div .conteneur_produit
   let conteneur_produit = document.querySelector(".conteneur_produit");
   //créer div .produit
