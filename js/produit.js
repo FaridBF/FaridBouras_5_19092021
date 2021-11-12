@@ -59,7 +59,7 @@ function displayProduct(data) {
   // pour chaque élément de data.lenses
   data.lenses.forEach((element) => {
     // --- creer une balise option
-    selection_option = document.createElement("option");
+    let selection_option = document.createElement("option");
     // assigner à cette balise la valeur de l'élément
     selection_option.innerHTML = element;
     // ajouter à la balise option un attribut value avec valeur de l'élément
@@ -98,7 +98,7 @@ function displayProduct(data) {
   const array = ["1", "2", "3", "4", "5"];
   array.forEach((element) => {
     // creer une balise quantite_option
-    quantite_option = document.createElement("option");
+    let quantite_option = document.createElement("option");
     // assigner à cette balise la valeur de l'élément
     quantite_option.innerHTML = element;
     // ajouter à la balise option un attribut value avec la valeur de l'élément
